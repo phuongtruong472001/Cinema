@@ -183,12 +183,14 @@ class _MovieBookState extends State<MovieBook> with SingleTickerProviderStateMix
 
     //#####################################################################################################################//
 
-    return Container(
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: children,
+    return Scaffold(
+      body: Container(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: children,
+        ),
       ),
     );
   }

@@ -1,19 +1,16 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'api_response.g.dart';
 
 @JsonSerializable(genericArgumentFactories: true)
 class ApiResponse<T> {
-  final String? message;
+  final bool success;
   final T data;
-  final String? code;
 
   ApiResponse({
-    this.message,
     required this.data,
-    this.code,
+    required this.success,
   });
 
-  factory ApiResponse.fromJson(
-          Map<String, dynamic> json, T Function(Object? json) fromJsonT) =>
-      _$ApiResponseFromJson(json, fromJsonT);
+  factory ApiResponse.fromJson(Map<String, dynamic> json, T Function(Object? json) fromJsonT) => _$ApiResponseFromJson(json, fromJsonT);
 }

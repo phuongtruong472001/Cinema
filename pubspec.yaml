@@ -39,10 +39,18 @@ dependencies:
   provider: ^6.0.5
   cached_network_image: ^3.3.1
   font_awesome_flutter: ^10.7.0
+  dio: ^5.5.0+1
+  freezed: ^2.4.1
+  retrofit: ^4.0.1
+  get_storage: ^2.1.1
+  logger: ^2.4.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: any
+  retrofit_generator: ^7.0.8
+  json_serializable: ^6.7.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

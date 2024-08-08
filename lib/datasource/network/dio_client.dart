@@ -37,7 +37,7 @@ dynamic requestInterceptor(
     'Content-Type': 'application/json',
   });
   final token = await box.read(AppKeys.token);
-  if (token != '') {
+  if (token != '' && token != null) {
     request.headers.addAll({
       'Authorization': 'Bearer $token',
     });

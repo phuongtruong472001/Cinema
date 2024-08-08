@@ -78,7 +78,7 @@ class _MoviePoster extends StatelessWidget {
 
     return Container(
       width: 130,
-      height: double.infinity,
+      height: 230,
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: GestureDetector(
         onTap: () => Navigator.pushNamed(context, 'details', arguments: movie),

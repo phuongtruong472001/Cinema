@@ -12,28 +12,31 @@ class _RestClientApi implements RestClientApi {
   _RestClientApi(
     this._dio, {
     this.baseUrl,
-  });
+  }) {
+    baseUrl ??= 'http://localhost:3000';
+  }
 
   final Dio _dio;
 
   String? baseUrl;
 
   @override
-  Future<ApiResponse<dynamic>> login(Map<String, dynamic> body) async {
+  Future<ApiResponse<LoginResponse<dynamic>>> login(
+      Map<String, dynamic> body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ApiResponse<dynamic>>(Options(
+        _setStreamType<ApiResponse<LoginResponse<dynamic>>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '',
+              '/auth/login',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -42,9 +45,12 @@ class _RestClientApi implements RestClientApi {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ApiResponse<dynamic>.fromJson(
+    final value = ApiResponse<LoginResponse<dynamic>>.fromJson(
       _result.data!,
-      (json) => json as dynamic,
+      (json) => LoginResponse<dynamic>.fromJson(
+        json as Map<String, dynamic>,
+        (json) => json as dynamic,
+      ),
     );
     return value;
   }

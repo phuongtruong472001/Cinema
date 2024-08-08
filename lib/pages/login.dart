@@ -1,4 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:s7_cinema/datasource/local/storage.dart';
+import 'package:s7_cinema/models/response/login_response/login_response.dart';
+import 'package:s7_cinema/repository/auth/auth_repository.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -8,8 +12,42 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController(text: 'admin@cinema.com');
+  final TextEditingController _passwordController = TextEditingController(text: '12345678');
+  final api = ApiLogin.instance.restClient;
+
+  onLogin() async {
+    try {
+      final response = await api.login({
+        "email": "admin@cinema.com", //_emailController.text.trim()
+        "password": "12345678", //_passwordController.text.trim()
+      });
+      LoginResponse? loginResponse = response.data;
+
+      BaseBox.setToken(loginResponse.accessToken ?? '');
+      BaseBox.setUserData(loginResponse);
+      Navigator.pushNamed(context, 'home');
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  Future<void> fetchData() async {
+    try {
+      var dio = Dio();
+      var response = await dio.post('http://localhost:3000/auth/login', data: {
+        "email": "admin@cinema.com", //_emailController.text.trim()
+        "password": "12345678", //_passwordController.text.trim()
+        'headers': {
+          'Content-Type': 'application/json',
+        },
+      });
+      print(response.data); // Handle your response data here
+    } catch (e) {
+      print(e.toString());
+      // Handle error appropriately
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextField(
+            TextFormField(
               controller: _emailController,
               decoration: const InputDecoration(
                 labelText: 'Email',
@@ -30,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             const SizedBox(height: 20.0),
-            TextField(
+            TextFormField(
               controller: _passwordController,
               obscureText: true,
               decoration: const InputDecoration(
@@ -41,32 +79,10 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                // // Thực hiện xử lý đăng nhập ở đây
-                // String email = _emailController.text;
-                // String password = _passwordController.text;
-                // // Ví dụ: Kiểm tra đăng nhập và điều hướng tới trang khác
-                // if (email == 'example@example.com' && password == 'password') {
-                Navigator.pushNamed(context, 'home');
-                // } else {
-                //   // Xử lý khi đăng nhập không thành công, ví dụ như hiển thị thông báo lỗi
-                //   showDialog(
-                //     context: context,
-                //     builder: (BuildContext context) {
-                //       return AlertDialog(
-                //         title: const Text('Đăng nhập thất bại'),
-                //         content: const Text('Email hoặc mật khẩu không đúng.'),
-                //         actions: <Widget>[
-                //           TextButton(
-                //             child: const Text('Đóng'),
-                //             onPressed: () {
-                //               Navigator.of(context).pop();
-                //             },
-                //           ),
-                //         ],
-                //       );
-                //     },
-                //   );
-                // }
+                if (_emailController.text.trim().isEmpty || _passwordController.text.trim().isEmpty) {
+                  return;
+                }
+                onLogin();
               },
               child: const Text('Đăng nhập'),
             ),

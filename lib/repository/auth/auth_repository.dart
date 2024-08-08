@@ -3,6 +3,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:s7_cinema/const/api_url.dart';
 import 'package:s7_cinema/datasource/network/dio_client.dart';
 import 'package:s7_cinema/models/response/api_response.dart';
+import 'package:s7_cinema/models/response/login_response/login_response.dart';
 
 part 'auth_repository.g.dart';
 
@@ -19,5 +20,5 @@ abstract class RestClientApi {
   factory RestClientApi(Dio dio, {String baseUrl}) = _RestClientApi;
 
   @POST(ApiUrl.login)
-  Future<ApiResponse> login(@Body() Map<String, dynamic> body);
+  Future<ApiResponse<LoginResponse>> login(@Body() Map<String, dynamic> body);
 }

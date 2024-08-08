@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Cinema',
-      initialRoute: 'home',
+      initialRoute: 'login',
       routes: Routes.routes,
       theme: ThemeData.light().copyWith(
         appBarTheme: const AppBarTheme(

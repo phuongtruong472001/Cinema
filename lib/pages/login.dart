@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                // // Thực hiện xử lý đăng nhập ở đây
+                /// TODO: Thực hiện xử lý đăng nhập ở đây
                 // String email = _emailController.text;
                 // String password = _passwordController.text;
                 // // Ví dụ: Kiểm tra đăng nhập và điều hướng tới trang khác
@@ -69,6 +69,19 @@ class _LoginPageState extends State<LoginPage> {
                 // }
               },
               child: const Text('Đăng nhập'),
+            ),
+            const SizedBox(height: 20.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text('Chưa có tài khoản?'),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'register');
+                  },
+                  child: const Text('Đăng ký'),
+                ),
+              ],
             ),
           ],
         ),

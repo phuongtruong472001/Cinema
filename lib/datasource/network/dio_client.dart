@@ -56,6 +56,9 @@ dynamic responseInterceptor(
 ) async {
   if (response.statusCode == 200 || response.statusCode == 201) {
     dynamic data = response.data;
+    Logger().d({
+      'body': data,
+    });
     return handler.next(
       Response(
         requestOptions: response.requestOptions,

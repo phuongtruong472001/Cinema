@@ -21,4 +21,7 @@ abstract class RestClientApi {
 
   @POST(ApiUrl.login)
   Future<ApiResponse<LoginResponse>> login(@Body() Map<String, dynamic> body);
+
+  @POST(ApiUrl.register)
+  Future<ApiResponse<LoginResponse>> register(@Body() Map<String, dynamic> body);
 }

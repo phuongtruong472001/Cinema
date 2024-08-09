@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:s7_cinema/datasource/local/storage.dart';
 import 'package:s7_cinema/models/response/login_response/login_response.dart';
@@ -29,23 +28,6 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushNamed(context, 'home');
     } catch (error) {
       print(error);
-    }
-  }
-
-  Future<void> fetchData() async {
-    try {
-      var dio = Dio();
-      var response = await dio.post('http://localhost:3000/auth/login', data: {
-        "email": "admin@cinema.com", //_emailController.text.trim()
-        "password": "12345678", //_passwordController.text.trim()
-        'headers': {
-          'Content-Type': 'application/json',
-        },
-      });
-      print(response.data); // Handle your response data here
-    } catch (e) {
-      print(e.toString());
-      // Handle error appropriately
     }
   }
 

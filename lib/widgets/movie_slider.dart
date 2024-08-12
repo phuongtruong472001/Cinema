@@ -43,7 +43,7 @@ class _MovieSliderState extends State<MovieSlider> {
 
     return SizedBox(
         width: double.infinity,
-        height: size.height * 0.35,
+        height: size.height * 0.5,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

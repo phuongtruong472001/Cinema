@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:s7_cinema/pages/admin/home_ad.dart';
 import 'package:s7_cinema/pages/login.dart';
 import 'package:s7_cinema/pages/movie_book.dart';
 
@@ -12,5 +13,6 @@ class Routes {
     'home': (_) => const HomePage(),
     'details': (_) => const DetailsPage(),
     'book': (_) => const MovieBook(),
+    'home_ad': (_) => const HomeAd(),
   };
 }

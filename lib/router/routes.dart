@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:s7_cinema/pages/admin/home_ad.dart';
+import 'package:s7_cinema/pages/admin/movie_management.dart';
 import 'package:s7_cinema/pages/login.dart';
 import 'package:s7_cinema/pages/movie_book.dart';
 
@@ -14,5 +15,9 @@ class Routes {
     'details': (_) => const DetailsPage(),
     'book': (_) => const MovieBook(),
     'home_ad': (_) => const HomeAd(),
+    'movie_management': (_) => const MovieManagementPage(),
+    // 'theater': (_) => const TheaterPage(),
+    // 'schedule': (_) => const SchedulePage(),
+    // 'profile': (_) => const Profile(),
   };
 }

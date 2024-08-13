@@ -6,4 +6,7 @@ class ApiUrl {
 
   static const String film = '/film';
   static const String filmDetail = '/film/detail';
+
+  static const String theater = '/theater';
+  static const String theaterDetail = '/theater/detail';
 }

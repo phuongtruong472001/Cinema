@@ -4,12 +4,12 @@ import 'package:s7_cinema/const/api_url.dart';
 import 'package:s7_cinema/datasource/network/dio_client.dart';
 import 'package:s7_cinema/models/response/api_response.dart';
 
-part 'film_repository.g.dart';
+part 'theather_repository.g.dart';
 
-class ApiFilm {
-  ApiFilm._();
-  static final ApiFilm _apiFilm = ApiFilm._();
-  static ApiFilm get instance => _apiFilm;
+class ApiTheater {
+  ApiTheater._();
+  static final ApiTheater _apiTheater = ApiTheater._();
+  static ApiTheater get instance => _apiTheater;
 
   RestClientApi get restClient => RestClientApi(dioClient(ApiUrl.baseUrl));
 }
@@ -18,9 +18,9 @@ class ApiFilm {
 abstract class RestClientApi {
   factory RestClientApi(Dio dio, {String baseUrl}) = _RestClientApi;
 
-  @POST(ApiUrl.film)
-  Future<ApiResponse> listFilm(@Body() Map<String, dynamic> body);
+  @POST(ApiUrl.theater)
+  Future<ApiResponse> listTheater(@Body() Map<String, dynamic> body);
 
-  @POST(ApiUrl.filmDetail)
-  Future<ApiResponse> detailFilm(@Body() Map<String, dynamic> body);
+  @POST(ApiUrl.theaterDetail)
+  Future<ApiResponse> detailTheater(@Body() Map<String, dynamic> body);
 }

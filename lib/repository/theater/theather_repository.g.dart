@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'film_repository.dart';
+part of 'theather_repository.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -21,7 +21,7 @@ class _RestClientApi implements RestClientApi {
   String? baseUrl;
 
   @override
-  Future<ApiResponse<dynamic>> listFilm(Map<String, dynamic> body) async {
+  Future<ApiResponse<dynamic>> listTheater(Map<String, dynamic> body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -35,7 +35,7 @@ class _RestClientApi implements RestClientApi {
     )
             .compose(
               _dio.options,
-              '/film',
+              '/theater',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -52,7 +52,7 @@ class _RestClientApi implements RestClientApi {
   }
 
   @override
-  Future<ApiResponse<dynamic>> detailFilm(Map<String, dynamic> body) async {
+  Future<ApiResponse<dynamic>> detailTheater(Map<String, dynamic> body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -66,7 +66,7 @@ class _RestClientApi implements RestClientApi {
     )
             .compose(
               _dio.options,
-              '/film/detail',
+              '/theater/detail',
               queryParameters: queryParameters,
               data: _data,
             )

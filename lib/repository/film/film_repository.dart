@@ -3,6 +3,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:s7_cinema/const/api_url.dart';
 import 'package:s7_cinema/datasource/network/dio_client.dart';
 import 'package:s7_cinema/models/response/api_response.dart';
+import 'package:s7_cinema/models/response/film/film.dart';
 
 part 'film_repository.g.dart';
 
@@ -18,9 +19,18 @@ class ApiFilm {
 abstract class RestClientApi {
   factory RestClientApi(Dio dio, {String baseUrl}) = _RestClientApi;
 
-  @POST(ApiUrl.film)
+  @GET(ApiUrl.film)
   Future<ApiResponse> listFilm(@Body() Map<String, dynamic> body);
 
-  @POST(ApiUrl.filmDetail)
-  Future<ApiResponse> detailFilm(@Body() Map<String, dynamic> body);
+  @GET('${ApiUrl.film}/{id}')
+  Future<ApiResponse<FilmResponse>> detailFilm(@Path() String id);
+
+  @POST(ApiUrl.film)
+  Future<ApiResponse> createFilm(@Body() Map<String, dynamic> body);
+
+  @PATCH('${ApiUrl.film}/{id}')
+  Future<ApiResponse> updateFilm(@Body() Map<String, dynamic> body, @Path() String id);
+
+  @DELETE('${ApiUrl.film}/{id}')
+  Future<ApiResponse> deleteFilm(@Path() String id);
 }

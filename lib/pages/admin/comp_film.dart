@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:s7_cinema/models/response/film/film.dart';
 import 'package:s7_cinema/repository/film/film_repository.dart';
 
 class CompFilm extends StatefulWidget {
-  const CompFilm({super.key});
+  const CompFilm({super.key, this.id});
+  final String? id;
 
   @override
   State<CompFilm> createState() => _CompFilmState();
@@ -10,10 +12,8 @@ class CompFilm extends StatefulWidget {
 
 class _CompFilmState extends State<CompFilm> {
   TextEditingController nameController = TextEditingController();
-  TextEditingController categoryController = TextEditingController();
-  TextEditingController directorController = TextEditingController();
-  TextEditingController actorController = TextEditingController();
   TextEditingController durationController = TextEditingController();
+
   TextEditingController descriptionController = TextEditingController();
   TextEditingController trailerController = TextEditingController();
   TextEditingController imageController = TextEditingController();
@@ -21,19 +21,24 @@ class _CompFilmState extends State<CompFilm> {
   final api = ApiFilm.instance.restClient;
   bool isEdit = false;
 
+  FilmResponse? film;
+
   @override
   initState() {
-    if (ModalRoute.of(context)!.settings.arguments != null) {
-      getFilm();
+    if (widget.id != null) {
+      getFilm(widget.id!);
       isEdit = true;
     }
     super.initState();
   }
 
-  getFilm() async {
+  getFilm(String id) async {
     try {
-      final response = await api.detailFilm({});
-      print(response);
+      film = (await api.detailFilm(id)).data;
+      nameController.text = film!.name ?? '';
+      durationController.text = film!.duration.toString();
+      descriptionController.text = film!.description ?? '';
+      setState(() {});
     } catch (error) {
       print(error);
     }
@@ -50,38 +55,35 @@ class _CompFilmState extends State<CompFilm> {
         title: Text(isEdit ? 'Sửa phim' : 'Thêm phim'),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            TextField(
-              controller: nameController,
-            ),
-            TextField(
-              controller: categoryController,
-            ),
-            TextField(
-              controller: directorController,
-            ),
-            TextField(
-              controller: actorController,
-            ),
-            TextField(
-              controller: durationController,
-            ),
-            TextField(
-              controller: descriptionController,
-              maxLength: 5,
-            ),
-            TextField(
-              controller: trailerController,
-            ),
-            TextField(
-              controller: imageController,
-            ),
-            TextButton(
-              onPressed: isEdit ? editFilm : createFilm,
-              child: Text(isEdit ? 'Sửa' : 'Thêm'),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              TextFormField(
+                controller: nameController,
+              ),
+              TextFormField(
+                controller: durationController,
+              ),
+              TextFormField(
+                controller: durationController,
+              ),
+              TextFormField(
+                controller: descriptionController,
+                maxLines: 5,
+              ),
+              TextFormField(
+                controller: trailerController,
+              ),
+              TextFormField(
+                controller: imageController,
+              ),
+              TextButton(
+                onPressed: isEdit ? editFilm : createFilm,
+                child: Text(isEdit ? 'Sửa' : 'Thêm'),
+              ),
+            ],
+          ),
         ),
       ),
     );

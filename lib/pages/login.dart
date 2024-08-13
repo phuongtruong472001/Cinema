@@ -24,6 +24,7 @@ class _LoginPageState extends State<LoginPage> {
       LoginResponse? loginResponse = response.data;
 
       BaseBox.setToken(loginResponse.accessToken ?? '');
+      print(BaseBox.getToken());
       BaseBox.setUserData(loginResponse);
       Navigator.pushNamed(context, loginResponse.role == 2 ? 'home_ad' : 'home');
     } catch (error) {

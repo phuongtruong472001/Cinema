@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:logger/logger.dart';
 import 'package:s7_cinema/const/app_key.dart';
+import 'package:s7_cinema/datasource/local/storage.dart';
 
 // import '../main.dart';
 final box = GetStorage();
@@ -36,8 +37,8 @@ dynamic requestInterceptor(
   request.headers.addAll({
     'Content-Type': 'application/json',
   });
-  final token = await box.read(AppKeys.token);
-  if (token != '' && token != null) {
+  final token = BaseBox.getToken();
+  if (token != '') {
     request.headers.addAll({
       'Authorization': 'Bearer $token',
     });
@@ -79,9 +80,9 @@ dynamic errorInterceptor(DioException error, ErrorInterceptorHandler handler, Di
       // handle error api , example token expired
       final response = await apiCallToRefreshToken(dio);
       final newToken = response['token'];
-      final newRefreshToken = response['refreshToken'];
+
       box.write(AppKeys.token, newToken);
-      box.write(AppKeys.refreshToken, newRefreshToken);
+
       // call request
       RequestOptions requestOptions = error.requestOptions;
       requestOptions.headers['Authorization'] = 'Bearer $newToken';
@@ -96,14 +97,14 @@ dynamic errorInterceptor(DioException error, ErrorInterceptorHandler handler, Di
     handler.next(error);
   } catch (e) {
     box.remove(AppKeys.token);
-    box.remove(AppKeys.refreshToken);
+
     //navigatorKey.currentState?.pushReplacementNamed(AppRoutes.login, arguments: {'expiredToken': true});
   }
 }
 
 Future<Map<String, dynamic>> apiCallToRefreshToken(Dio dio) async {
   try {
-    final oldRefreshToken = await box.read(AppKeys.refreshToken);
+    final oldRefreshToken = await box.read(AppKeys.token);
     final Response response = await dio.post('/auth/refresh_token', data: {'refreshToken': oldRefreshToken});
     if (response.statusCode == 200) {
       String newToken = response.data['token'];

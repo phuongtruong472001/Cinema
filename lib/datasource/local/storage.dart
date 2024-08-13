@@ -26,10 +26,7 @@ class BaseBox {
   static LoginResponse? getUserData() {
     final data = box.read(AppKeys.userData);
     if (data != null) {
-      return LoginResponse.fromJson(
-        jsonDecode(data),
-        (json) => json as dynamic,
-      );
+      return LoginResponse.fromJson(jsonDecode(data));
     }
     return null;
   }

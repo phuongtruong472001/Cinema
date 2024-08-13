@@ -21,15 +21,14 @@ class _RestClientApi implements RestClientApi {
   String? baseUrl;
 
   @override
-  Future<ApiResponse<LoginResponse<dynamic>>> login(
-      Map<String, dynamic> body) async {
+  Future<ApiResponse<LoginResponse>> login(Map<String, dynamic> body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ApiResponse<LoginResponse<dynamic>>>(Options(
+        _setStreamType<ApiResponse<LoginResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -45,26 +44,22 @@ class _RestClientApi implements RestClientApi {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ApiResponse<LoginResponse<dynamic>>.fromJson(
+    final value = ApiResponse<LoginResponse>.fromJson(
       _result.data!,
-      (json) => LoginResponse<dynamic>.fromJson(
-        json as Map<String, dynamic>,
-        (json) => json as dynamic,
-      ),
+      (json) => LoginResponse.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }
 
   @override
-  Future<ApiResponse<LoginResponse<dynamic>>> register(
-      Map<String, dynamic> body) async {
+  Future<ApiResponse<LoginResponse>> register(Map<String, dynamic> body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ApiResponse<LoginResponse<dynamic>>>(Options(
+        _setStreamType<ApiResponse<LoginResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -80,12 +75,9 @@ class _RestClientApi implements RestClientApi {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ApiResponse<LoginResponse<dynamic>>.fromJson(
+    final value = ApiResponse<LoginResponse>.fromJson(
       _result.data!,
-      (json) => LoginResponse<dynamic>.fromJson(
-        json as Map<String, dynamic>,
-        (json) => json as dynamic,
-      ),
+      (json) => LoginResponse.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }

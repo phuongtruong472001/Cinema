@@ -43,7 +43,7 @@ class _MovieSliderState extends State<MovieSlider> {
 
     return SizedBox(
         width: double.infinity,
-        height: size.height * 0.35,
+        height: size.height * 0.5,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -78,7 +78,7 @@ class _MoviePoster extends StatelessWidget {
 
     return Container(
       width: 130,
-      height: double.infinity,
+      height: 230,
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: GestureDetector(
         onTap: () => Navigator.pushNamed(context, 'details', arguments: movie),

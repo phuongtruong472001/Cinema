@@ -9,4 +9,8 @@ class ApiUrl {
 
   static const String theater = '/theater';
   static const String theaterDetail = '/theater/detail';
+
+  static const String showtimes = '/showtimes';
+
+  static const String room = '/room';
 }

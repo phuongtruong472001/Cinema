@@ -35,6 +35,19 @@ class MyApp extends StatelessWidget {
           iconTheme: IconThemeData(color: Colors.white),
           centerTitle: true,
         ),
+        inputDecorationTheme: const InputDecorationTheme(
+          labelStyle: TextStyle(
+            color: Colors.blue,
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              style: BorderStyle.solid,
+              color: Colors.blue,
+            ),
+          ),
+          border: OutlineInputBorder(),
+        ),
+        primaryColor: Colors.white,
       ),
     );
   }

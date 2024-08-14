@@ -41,10 +41,10 @@ class _MovieManagementPageState extends State<MovieManagementPage> {
       List<FilmResponse> list = response.data['items'].map<FilmResponse>((e) => FilmResponse.fromJson(e)).toList();
       listFilm.addAll(list);
       isLoading = false;
-      setState(() {});
     } catch (error) {
       print(error);
     }
+    setState(() {});
   }
 
   @override
@@ -81,7 +81,11 @@ class _MovieManagementPageState extends State<MovieManagementPage> {
   Widget _itemFilm(FilmResponse film) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => CompFilm(id: film.id)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => CompFilm(id: film.id))).then((value) {
+          if (value == true) {
+            getListFilm();
+          }
+        });
       },
       child: Container(
         decoration: BoxDecoration(

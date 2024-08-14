@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'film.dart';
+part of 'showtimes.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FilmResponseImpl _$$FilmResponseImplFromJson(Map<String, dynamic> json) => _$FilmResponseImpl(
+_$RoomResponseImpl _$$RoomResponseImplFromJson(Map<String, dynamic> json) => _$RoomResponseImpl(
       id: json['_id'] as String?,
       name: json['name'] as String?,
       duration: (json['duration'] as num?)?.toInt(),
@@ -16,7 +16,7 @@ _$FilmResponseImpl _$$FilmResponseImplFromJson(Map<String, dynamic> json) => _$F
       updatedAt: json['updatedAt'] == null ? null : DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$FilmResponseImplToJson(_$FilmResponseImpl instance) => <String, dynamic>{
+Map<String, dynamic> _$$RoomResponseImplToJson(_$RoomResponseImpl instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'duration': instance.duration,

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:s7_cinema/models/response/film/film.dart';
 import 'package:s7_cinema/repository/film/film_repository.dart';
+import 'package:s7_cinema/widgets/base_input.dart';
+import 'package:s7_cinema/widgets/base_snackbar.dart';
 
 class CompFilm extends StatefulWidget {
   const CompFilm({super.key, this.id});
@@ -44,7 +47,23 @@ class _CompFilmState extends State<CompFilm> {
     }
   }
 
-  void editFilm() {}
+  void editFilm() async {
+    try {
+      await api.updateFilm(
+        {
+          "name": nameController.text,
+          "duration": int.parse(durationController.text),
+          "description": descriptionController.text,
+        },
+        widget.id!,
+      );
+      Navigator.pop(context, true);
+      ScaffoldMessenger.of(context).showSnackBar(baseSnackbar(message: 'Sửa thành công'));
+    } catch (error) {
+      print(error);
+      ScaffoldMessenger.of(context).showSnackBar(baseSnackbar(isSuccess: false, message: 'Sửa thất bại'));
+    }
+  }
 
   void createFilm() {}
 
@@ -59,25 +78,28 @@ class _CompFilmState extends State<CompFilm> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              TextFormField(
+              BaseInput(
                 controller: nameController,
+                label: 'Tên phim',
               ),
-              TextFormField(
+              const SizedBox(height: 12),
+              BaseInput(
                 controller: durationController,
+                label: 'Thời lượng',
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               ),
-              TextFormField(
-                controller: durationController,
-              ),
-              TextFormField(
+              const SizedBox(height: 12),
+              BaseInput(
                 controller: descriptionController,
                 maxLines: 5,
+                label: 'Mô tả',
               ),
-              TextFormField(
+              const SizedBox(height: 12),
+              BaseInput(
                 controller: trailerController,
+                label: 'Trailer',
               ),
-              TextFormField(
-                controller: imageController,
-              ),
+              const SizedBox(height: 12),
               TextButton(
                 onPressed: isEdit ? editFilm : createFilm,
                 child: Text(isEdit ? 'Sửa' : 'Thêm'),

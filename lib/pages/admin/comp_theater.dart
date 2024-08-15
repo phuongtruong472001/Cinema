@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:s7_cinema/repository/theater/theather_repository.dart';
+import 'package:s7_cinema/models/response/room/room.dart';
+import 'package:s7_cinema/repository/room/room_repository.dart';
 
 class CompTheater extends StatefulWidget {
-  const CompTheater({super.key});
+  const CompTheater({super.key, this.id});
+  final String? id;
 
   @override
   State<CompTheater> createState() => _CompTheaterState();
@@ -10,30 +12,25 @@ class CompTheater extends StatefulWidget {
 
 class _CompTheaterState extends State<CompTheater> {
   TextEditingController nameController = TextEditingController();
-  TextEditingController categoryController = TextEditingController();
-  TextEditingController directorController = TextEditingController();
-  TextEditingController actorController = TextEditingController();
-  TextEditingController durationController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  TextEditingController trailerController = TextEditingController();
-  TextEditingController imageController = TextEditingController();
 
-  final api = ApiTheater.instance.restClient;
+  final api = ApiRoom.instance.restClient;
   bool isEdit = false;
+
+  RoomResponse? room;
 
   @override
   initState() {
-    if (ModalRoute.of(context)!.settings.arguments != null) {
-      getTheater();
+    if (widget.id != null) {
+      getTheater(widget.id!);
       isEdit = true;
     }
     super.initState();
   }
 
-  getTheater() async {
+  getTheater(String id) async {
     try {
-      final response = await api.detailTheater({});
-      print(response);
+      room = (await api.detailRoom(id)).data;
+      nameController.text = room!.name ?? '';
     } catch (error) {
       print(error);
     }
@@ -54,28 +51,6 @@ class _CompTheaterState extends State<CompTheater> {
           children: [
             TextField(
               controller: nameController,
-            ),
-            TextField(
-              controller: categoryController,
-            ),
-            TextField(
-              controller: directorController,
-            ),
-            TextField(
-              controller: actorController,
-            ),
-            TextField(
-              controller: durationController,
-            ),
-            TextField(
-              controller: descriptionController,
-              maxLength: 5,
-            ),
-            TextField(
-              controller: trailerController,
-            ),
-            TextField(
-              controller: imageController,
             ),
             TextButton(
               onPressed: isEdit ? editTheater : createTheater,

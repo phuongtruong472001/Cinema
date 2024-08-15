@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-RoomResponse _$RoomResponseFromJson(Map<String, dynamic> json) {
-  return _RoomResponse.fromJson(json);
+ShowtimesResponse _$ShowtimesResponseFromJson(Map<String, dynamic> json) {
+  return _ShowtimesResponse.fromJson(json);
 }
 
 /// @nodoc
-mixin _$RoomResponse {
+mixin _$ShowtimesResponse {
   String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   int? get duration => throw _privateConstructorUsedError;
@@ -30,15 +30,15 @@ mixin _$RoomResponse {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $RoomResponseCopyWith<RoomResponse> get copyWith =>
+  $ShowtimesResponseCopyWith<ShowtimesResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RoomResponseCopyWith<$Res> {
-  factory $RoomResponseCopyWith(
-          RoomResponse value, $Res Function(RoomResponse) then) =
-      _$RoomResponseCopyWithImpl<$Res, RoomResponse>;
+abstract class $ShowtimesResponseCopyWith<$Res> {
+  factory $ShowtimesResponseCopyWith(
+          ShowtimesResponse value, $Res Function(ShowtimesResponse) then) =
+      _$ShowtimesResponseCopyWithImpl<$Res, ShowtimesResponse>;
   @useResult
   $Res call(
       {String? id,
@@ -51,9 +51,9 @@ abstract class $RoomResponseCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RoomResponseCopyWithImpl<$Res, $Val extends RoomResponse>
-    implements $RoomResponseCopyWith<$Res> {
-  _$RoomResponseCopyWithImpl(this._value, this._then);
+class _$ShowtimesResponseCopyWithImpl<$Res, $Val extends ShowtimesResponse>
+    implements $ShowtimesResponseCopyWith<$Res> {
+  _$ShowtimesResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -105,11 +105,11 @@ class _$RoomResponseCopyWithImpl<$Res, $Val extends RoomResponse>
 }
 
 /// @nodoc
-abstract class _$$RoomResponseImplCopyWith<$Res>
-    implements $RoomResponseCopyWith<$Res> {
-  factory _$$RoomResponseImplCopyWith(
-          _$RoomResponseImpl value, $Res Function(_$RoomResponseImpl) then) =
-      __$$RoomResponseImplCopyWithImpl<$Res>;
+abstract class _$$ShowtimesResponseImplCopyWith<$Res>
+    implements $ShowtimesResponseCopyWith<$Res> {
+  factory _$$ShowtimesResponseImplCopyWith(_$ShowtimesResponseImpl value,
+          $Res Function(_$ShowtimesResponseImpl) then) =
+      __$$ShowtimesResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -123,11 +123,11 @@ abstract class _$$RoomResponseImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$RoomResponseImplCopyWithImpl<$Res>
-    extends _$RoomResponseCopyWithImpl<$Res, _$RoomResponseImpl>
-    implements _$$RoomResponseImplCopyWith<$Res> {
-  __$$RoomResponseImplCopyWithImpl(
-      _$RoomResponseImpl _value, $Res Function(_$RoomResponseImpl) _then)
+class __$$ShowtimesResponseImplCopyWithImpl<$Res>
+    extends _$ShowtimesResponseCopyWithImpl<$Res, _$ShowtimesResponseImpl>
+    implements _$$ShowtimesResponseImplCopyWith<$Res> {
+  __$$ShowtimesResponseImplCopyWithImpl(_$ShowtimesResponseImpl _value,
+      $Res Function(_$ShowtimesResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -141,7 +141,7 @@ class __$$RoomResponseImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$RoomResponseImpl(
+    return _then(_$ShowtimesResponseImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -176,8 +176,8 @@ class __$$RoomResponseImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$RoomResponseImpl implements _RoomResponse {
-  _$RoomResponseImpl(
+class _$ShowtimesResponseImpl implements _ShowtimesResponse {
+  _$ShowtimesResponseImpl(
       {this.id,
       this.name,
       this.duration,
@@ -186,8 +186,8 @@ class _$RoomResponseImpl implements _RoomResponse {
       this.createdAt,
       this.updatedAt});
 
-  factory _$RoomResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$RoomResponseImplFromJson(json);
+  factory _$ShowtimesResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ShowtimesResponseImplFromJson(json);
 
   @override
   final String? id;
@@ -206,14 +206,14 @@ class _$RoomResponseImpl implements _RoomResponse {
 
   @override
   String toString() {
-    return 'RoomResponse(id: $id, name: $name, duration: $duration, description: $description, thumbnail: $thumbnail, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ShowtimesResponse(id: $id, name: $name, duration: $duration, description: $description, thumbnail: $thumbnail, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RoomResponseImpl &&
+            other is _$ShowtimesResponseImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.duration, duration) ||
@@ -236,29 +236,30 @@ class _$RoomResponseImpl implements _RoomResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$RoomResponseImplCopyWith<_$RoomResponseImpl> get copyWith =>
-      __$$RoomResponseImplCopyWithImpl<_$RoomResponseImpl>(this, _$identity);
+  _$$ShowtimesResponseImplCopyWith<_$ShowtimesResponseImpl> get copyWith =>
+      __$$ShowtimesResponseImplCopyWithImpl<_$ShowtimesResponseImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$RoomResponseImplToJson(
+    return _$$ShowtimesResponseImplToJson(
       this,
     );
   }
 }
 
-abstract class _RoomResponse implements RoomResponse {
-  factory _RoomResponse(
+abstract class _ShowtimesResponse implements ShowtimesResponse {
+  factory _ShowtimesResponse(
       {final String? id,
       final String? name,
       final int? duration,
       final String? description,
       final String? thumbnail,
       final DateTime? createdAt,
-      final DateTime? updatedAt}) = _$RoomResponseImpl;
+      final DateTime? updatedAt}) = _$ShowtimesResponseImpl;
 
-  factory _RoomResponse.fromJson(Map<String, dynamic> json) =
-      _$RoomResponseImpl.fromJson;
+  factory _ShowtimesResponse.fromJson(Map<String, dynamic> json) =
+      _$ShowtimesResponseImpl.fromJson;
 
   @override
   String? get id;
@@ -276,6 +277,6 @@ abstract class _RoomResponse implements RoomResponse {
   DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
-  _$$RoomResponseImplCopyWith<_$RoomResponseImpl> get copyWith =>
+  _$$ShowtimesResponseImplCopyWith<_$ShowtimesResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

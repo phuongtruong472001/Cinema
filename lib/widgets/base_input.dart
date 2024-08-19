@@ -124,9 +124,9 @@ class BaseInput extends StatelessWidget {
             onTapOutside: onTapOutside,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             inputFormatters: inputFormatters,
-            minLines: minLines,
+            minLines: minLines ?? 1,
             autofocus: autofocus,
-            maxLines: maxLines,
+            maxLines: maxLines ?? 1,
             validator: validator,
             decoration: InputDecoration(
               counter: const SizedBox(),

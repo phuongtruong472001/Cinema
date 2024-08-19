@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:s7_cinema/datasource/local/storage.dart';
 import 'package:s7_cinema/models/response/login_response/login_response.dart';
 import 'package:s7_cinema/repository/auth/auth_repository.dart';
+import 'package:s7_cinema/widgets/base_input.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,11 +16,13 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController(text: '12345678');
   final api = ApiLogin.instance.restClient;
 
+  final formkey = GlobalKey<FormState>();
+
   onLogin() async {
     try {
       final response = await api.login({
-        "email": "admin@cinema.com", //_emailController.text.trim()
-        "password": "12345678", //_passwordController.text.trim()
+        "email": _emailController.text.trim(),
+        "password": _passwordController.text.trim(),
       });
       LoginResponse? loginResponse = response.data;
 
@@ -38,38 +41,51 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: const Text('Đăng nhập'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextFormField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'Email',
-                border: OutlineInputBorder(),
+      body: Form(
+        key: formkey,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              BaseInput(
+                controller: _emailController,
+                label: 'Email',
+                validator: (p0) => p0!.isEmpty ? 'Email không được để trống' : null,
               ),
-            ),
-            const SizedBox(height: 20.0),
-            TextFormField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'Mật khẩu',
-                border: OutlineInputBorder(),
+              const SizedBox(height: 20.0),
+              BaseInput(
+                controller: _passwordController,
+                obscureText: true,
+                label: 'Mật khẩu',
+                validator: (p0) {
+                  if (p0 == '' && p0!.isEmpty) return 'Mật khẩu không được để trống';
+                  return p0!.length < 8 ? 'Mật khẩu phải có ít nhất 8 ký tự' : null;
+                },
               ),
-            ),
-            const SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: () {
-                if (_emailController.text.trim().isEmpty || _passwordController.text.trim().isEmpty) {
-                  return;
-                }
-                onLogin();
-              },
-              child: const Text('Đăng nhập'),
-            ),
-          ],
+              const SizedBox(height: 20.0),
+              ElevatedButton(
+                onPressed: () {
+                  if (formkey.currentState!.validate()) {
+                    onLogin();
+                  }
+                },
+                child: const Text('Đăng nhập'),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Text('Chưa có tài khoản?'),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'register');
+                    },
+                    child: const Text('Đăng ký'),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

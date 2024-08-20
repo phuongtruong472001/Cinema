@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:s7_cinema/models/response/film/film.dart';
 import 'package:s7_cinema/widgets/button.dart';
-
-import '../models/models.dart' show Movie;
 
 class DetailsPage extends StatelessWidget {
   const DetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Movie movie = ModalRoute.of(context)!.settings.arguments as Movie;
+    final FilmResponse movie = ModalRoute.of(context)!.settings.arguments as FilmResponse;
 
     return Scaffold(
         body: CustomScrollView(
@@ -17,16 +16,18 @@ class DetailsPage extends StatelessWidget {
         SliverList(
           delegate: SliverChildListDelegate([
             _PosterAndTitle(movie),
-            const SizedBox(height: 15),
-            _Overview(movie),
+
             const SizedBox(height: 15),
 
             // CastingCards(movie.id)
-            BaseButton(
-              text: 'Order',
-              onPressed: () {
-                Navigator.pushNamed(context, 'book', arguments: movie);
-              },
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: BaseButton(
+                text: 'Đặt vé',
+                onPressed: () {
+                  Navigator.pushNamed(context, 'book', arguments: movie);
+                },
+              ),
             )
           ]),
         ),
@@ -36,7 +37,7 @@ class DetailsPage extends StatelessWidget {
 }
 
 class _CustomAppBar extends StatelessWidget {
-  final Movie movie;
+  final FilmResponse movie;
 
   const _CustomAppBar(this.movie);
 
@@ -52,25 +53,19 @@ class _CustomAppBar extends StatelessWidget {
         centerTitle: true,
         titlePadding: EdgeInsets.zero,
         title: Container(
-            width: double.infinity,
-            alignment: Alignment.bottomCenter,
-            color: Colors.black12,
-            padding: const EdgeInsets.only(bottom: 8, left: 20, right: 20),
-            child: Text(movie.title,
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.center)),
-        background: FadeInImage(placeholder: const AssetImage('assets/loading.gif'), image: NetworkImage(movie.fullBackdropPath), fit: BoxFit.cover),
+          width: double.infinity,
+          alignment: Alignment.bottomCenter,
+          color: Colors.black12,
+          padding: const EdgeInsets.only(bottom: 8, left: 20, right: 20),
+        ),
+        background: FadeInImage(placeholder: const AssetImage('assets/loading.gif'), image: NetworkImage(movie.thumbnail ?? ''), fit: BoxFit.cover),
       ),
     );
   }
 }
 
 class _PosterAndTitle extends StatelessWidget {
-  final Movie movie;
+  final FilmResponse movie;
 
   const _PosterAndTitle(this.movie);
 
@@ -84,51 +79,31 @@ class _PosterAndTitle extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Row(
           children: [
-            Hero(
-              tag: movie.heroId!,
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: FadeInImage(
-                    height: 150,
-                    placeholder: const AssetImage('assets/no_image.jpg'),
-                    image: NetworkImage(movie.fullPosterPath),
-                    fit: BoxFit.cover,
-                  )),
-            ),
+            ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: FadeInImage(
+                  height: 150,
+                  placeholder: const AssetImage('assets/no_image.jpg'),
+                  image: NetworkImage(movie.thumbnail ?? ''),
+                  fit: BoxFit.cover,
+                )),
             const SizedBox(width: 20),
-            ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: size.width - 190),
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(movie.title, style: textTheme.titleLarge, overflow: TextOverflow.ellipsis, maxLines: 2),
-                Text(movie.originalTitle, style: textTheme.titleMedium, overflow: TextOverflow.ellipsis, maxLines: 2),
-                const SizedBox(height: 5),
-                Row(
+            Expanded(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: size.width - 190),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.star_border_outlined, size: 20, color: Colors.grey),
-                    const SizedBox(width: 3),
-                    Text(
-                      '${movie.voteAverage}',
-                      style: textTheme.bodySmall,
-                      overflow: TextOverflow.ellipsis,
-                    )
+                    Text(movie.name ?? '', style: textTheme.titleLarge, overflow: TextOverflow.ellipsis, maxLines: 2),
+                    const SizedBox(height: 8),
+                    Text('Thời lượng: ${movie.duration} phút', style: textTheme.titleMedium, overflow: TextOverflow.ellipsis, maxLines: 2),
+                    const SizedBox(height: 8),
+                    Text('Mô tả: ${movie.description}', textAlign: TextAlign.justify, style: Theme.of(context).textTheme.bodyLarge),
                   ],
-                )
-              ]),
+                ),
+              ),
             )
           ],
         ));
-  }
-}
-
-class _Overview extends StatelessWidget {
-  final Movie movie;
-
-  const _Overview(this.movie);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-        child: Text(movie.overview, textAlign: TextAlign.justify, style: Theme.of(context).textTheme.bodyLarge));
   }
 }

@@ -3,6 +3,7 @@ import 'package:s7_cinema/datasource/local/storage.dart';
 import 'package:s7_cinema/models/response/login_response/login_response.dart';
 import 'package:s7_cinema/repository/auth/auth_repository.dart';
 import 'package:s7_cinema/widgets/base_input.dart';
+import 'package:s7_cinema/widgets/base_snackbar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -31,6 +32,7 @@ class _LoginPageState extends State<LoginPage> {
       BaseBox.setUserData(loginResponse);
       Navigator.pushNamed(context, loginResponse.role == 2 ? 'home_ad' : 'home');
     } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(baseSnackbar(isSuccess: false, message: 'Có lỗi xảy xa, vui lòng thử lại'));
       print(error);
     }
   }

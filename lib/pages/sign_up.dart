@@ -33,7 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ScaffoldMessenger.of(context).showSnackBar(baseSnackbar(message: 'Đăng ký thành công'));
       Navigator.pushNamed(context, 'login');
     } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(baseSnackbar(message: 'Có lỗi xảy xa, vui lòng thử lại'));
+      ScaffoldMessenger.of(context).showSnackBar(baseSnackbar(isSuccess: false, message: 'Có lỗi xảy xa, vui lòng thử lại'));
       print(error);
     }
     EasyLoading.dismiss();

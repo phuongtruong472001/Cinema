@@ -3,14 +3,14 @@ import 'package:s7_cinema/models/response/room/room.dart';
 import 'package:s7_cinema/pages/admin/comp_theater.dart';
 import 'package:s7_cinema/repository/room/room_repository.dart';
 
-class MovieManagementPage extends StatefulWidget {
-  const MovieManagementPage({super.key});
+class TheaterManagementPage extends StatefulWidget {
+  const TheaterManagementPage({super.key});
 
   @override
-  State<MovieManagementPage> createState() => _MovieManagementPageState();
+  State<TheaterManagementPage> createState() => _TheaterManagementPageState();
 }
 
-class _MovieManagementPageState extends State<MovieManagementPage> {
+class _TheaterManagementPageState extends State<TheaterManagementPage> {
   int pageIndex = 0;
 
   final api = ApiRoom.instance.restClient;
@@ -21,11 +21,11 @@ class _MovieManagementPageState extends State<MovieManagementPage> {
 
   @override
   void initState() {
-    getListRoom();
+    getLisrTheater();
     super.initState();
   }
 
-  getListRoom({bool? isLoadMore = false}) async {
+  getLisrTheater({bool? isLoadMore = false}) async {
     if (isLoadMore == false) {
       pageIndex = 0;
       listRoom.clear();
@@ -51,7 +51,19 @@ class _MovieManagementPageState extends State<MovieManagementPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Quản lý phim'),
+        title: const Text('Quản lý rạp'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const CompTheater())).then((value) {
+                if (value == true) {
+                  getLisrTheater();
+                }
+              });
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -83,7 +95,7 @@ class _MovieManagementPageState extends State<MovieManagementPage> {
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => CompTheater(id: film.id))).then((value) {
           if (value == true) {
-            getListRoom();
+            getLisrTheater();
           }
         });
       },
@@ -127,6 +139,11 @@ class _MovieManagementPageState extends State<MovieManagementPage> {
           const SizedBox(width: 8),
           IconButton(
             icon: const Icon(Icons.edit),
+            onPressed: () {},
+          ),
+          const SizedBox(width: 8),
+          IconButton(
+            icon: const Icon(Icons.delete),
             onPressed: () {},
           ),
         ]),

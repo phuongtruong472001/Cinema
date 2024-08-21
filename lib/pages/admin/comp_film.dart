@@ -16,7 +16,6 @@ class CompFilm extends StatefulWidget {
 class _CompFilmState extends State<CompFilm> {
   TextEditingController nameController = TextEditingController();
   TextEditingController durationController = TextEditingController();
-
   TextEditingController descriptionController = TextEditingController();
   TextEditingController trailerController = TextEditingController();
   TextEditingController imageController = TextEditingController();

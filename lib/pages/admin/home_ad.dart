@@ -56,8 +56,6 @@ class _HomeAdState extends State<HomeAd> {
             ),
             const SizedBox(height: 8),
             Text(_items.keys.elementAt(index)),
-            const SizedBox(height: 8),
-            const Text('Description'),
           ],
         ),
       ),

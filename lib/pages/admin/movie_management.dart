@@ -52,6 +52,18 @@ class _MovieManagementPageState extends State<MovieManagementPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Quản lý phim'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const CompFilm())).then((value) {
+                if (value == true) {
+                  getListFilm();
+                }
+              });
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -128,6 +140,11 @@ class _MovieManagementPageState extends State<MovieManagementPage> {
           const SizedBox(width: 8),
           IconButton(
             icon: const Icon(Icons.edit),
+            onPressed: () {},
+          ),
+          const SizedBox(width: 8),
+          IconButton(
+            icon: const Icon(Icons.delete),
             onPressed: () {},
           ),
         ]),

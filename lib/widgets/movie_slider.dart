@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
-import '../models/models.dart' show Movie;
+import 'package:s7_cinema/models/response/film/film.dart';
 
 class MovieSlider extends StatefulWidget {
   final String? title;
-  final List<Movie> movies;
+  final List<FilmResponse> movies;
   final Function onNextPage;
 
   const MovieSlider({
@@ -68,14 +67,12 @@ class _MovieSliderState extends State<MovieSlider> {
 }
 
 class _MoviePoster extends StatelessWidget {
-  final Movie movie;
+  final FilmResponse movie;
 
   const _MoviePoster(this.movie);
 
   @override
   Widget build(BuildContext context) {
-    movie.heroId = 'slider-${movie.id}';
-
     return Container(
       width: 130,
       height: 230,
@@ -84,22 +81,19 @@ class _MoviePoster extends StatelessWidget {
         onTap: () => Navigator.pushNamed(context, 'details', arguments: movie),
         child: Column(
           children: [
-            Hero(
-              tag: movie.heroId!,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: FadeInImage(
-                    placeholder: const AssetImage('assets/no_image.jpg'),
-                    image: NetworkImage(movie.fullPosterPath),
-                    width: 130,
-                    height: 190,
-                    fit: BoxFit.cover),
-              ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage(
+                  placeholder: const AssetImage('assets/no_image.jpg'),
+                  image: NetworkImage(movie.thumbnail ?? ''),
+                  width: 130,
+                  height: 190,
+                  fit: BoxFit.cover),
             ),
             const SizedBox(
               height: 8,
             ),
-            Text(movie.title, maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center)
+            Text(movie.name ?? '', maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center)
           ],
         ),
       ),

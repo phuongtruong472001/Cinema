@@ -4,13 +4,13 @@ part 'room.freezed.dart';
 part 'room.g.dart';
 
 @freezed
-class ShowtimesResponse with _$ShowtimesResponse {
-  factory ShowtimesResponse({
+class RoomResponse with _$RoomResponse {
+  factory RoomResponse({
     String? id,
     String? name,
     int? capacity,
     List<List<String>>? seats,
-  }) = _ShowtimesResponse;
+  }) = _RoomResponse;
 
-  factory ShowtimesResponse.fromJson(Map<String, dynamic> json) => _$ShowtimesResponseFromJson(json);
+  factory RoomResponse.fromJson(Map<String, dynamic> json) => _$RoomResponseFromJson(json);
 }

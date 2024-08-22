@@ -9,7 +9,7 @@ class RoomResponse with _$RoomResponse {
     String? id,
     String? name,
     int? capacity,
-    List<List<String>>? seats,
+    List<List<String?>>? seats,
   }) = _RoomResponse;
 
   factory RoomResponse.fromJson(Map<String, dynamic> json) => _$RoomResponseFromJson(json);

@@ -43,50 +43,55 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: const Text('Đăng nhập'),
       ),
-      body: Form(
-        key: formkey,
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              BaseInput(
-                controller: _emailController,
-                label: 'Email',
-                validator: (p0) => p0!.isEmpty ? 'Email không được để trống' : null,
-              ),
-              const SizedBox(height: 20.0),
-              BaseInput(
-                controller: _passwordController,
-                obscureText: true,
-                label: 'Mật khẩu',
-                validator: (p0) {
-                  if (p0 == '' && p0!.isEmpty) return 'Mật khẩu không được để trống';
-                  return p0!.length < 8 ? 'Mật khẩu phải có ít nhất 8 ký tự' : null;
-                },
-              ),
-              const SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: () {
-                  if (formkey.currentState!.validate()) {
-                    onLogin();
-                  }
-                },
-                child: const Text('Đăng nhập'),
-              ),
-              Row(
+      body: Center(
+        child: SizedBox(
+          width: 500,
+          child: Form(
+            key: formkey,
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const Text('Chưa có tài khoản?'),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, 'register');
+                  BaseInput(
+                    controller: _emailController,
+                    label: 'Email',
+                    validator: (p0) => p0!.isEmpty ? 'Email không được để trống' : null,
+                  ),
+                  const SizedBox(height: 20.0),
+                  BaseInput(
+                    controller: _passwordController,
+                    obscureText: true,
+                    label: 'Mật khẩu',
+                    validator: (p0) {
+                      if (p0 == '' && p0!.isEmpty) return 'Mật khẩu không được để trống';
+                      return p0!.length < 8 ? 'Mật khẩu phải có ít nhất 8 ký tự' : null;
                     },
-                    child: const Text('Đăng ký'),
+                  ),
+                  const SizedBox(height: 20.0),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (formkey.currentState!.validate()) {
+                        onLogin();
+                      }
+                    },
+                    child: const Text('Đăng nhập'),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Text('Chưa có tài khoản?'),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'register');
+                        },
+                        child: const Text('Đăng ký'),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),

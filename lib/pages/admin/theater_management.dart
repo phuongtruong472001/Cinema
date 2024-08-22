@@ -93,11 +93,11 @@ class _TheaterManagementPageState extends State<TheaterManagementPage> {
   Widget _itemRoom(RoomResponse film) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => CompTheater(id: film.id))).then((value) {
-          if (value == true) {
-            getLisrTheater();
-          }
-        });
+        // Navigator.push(context, MaterialPageRoute(builder: (context) => CompTheater(id: film.id))).then((value) {
+        //   if (value == true) {
+        //     getLisrTheater();
+        //   }
+        // });
       },
       child: Container(
         decoration: BoxDecoration(
@@ -139,7 +139,13 @@ class _TheaterManagementPageState extends State<TheaterManagementPage> {
           const SizedBox(width: 8),
           IconButton(
             icon: const Icon(Icons.edit),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CompTheater(id: film.id))).then((value) {
+                if (value == true) {
+                  getLisrTheater();
+                }
+              });
+            },
           ),
           const SizedBox(width: 8),
           IconButton(

@@ -23,7 +23,7 @@ mixin _$RoomResponse {
   String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   int? get capacity => throw _privateConstructorUsedError;
-  List<List<String>>? get seats => throw _privateConstructorUsedError;
+  List<List<String?>>? get seats => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +38,7 @@ abstract class $RoomResponseCopyWith<$Res> {
       _$RoomResponseCopyWithImpl<$Res, RoomResponse>;
   @useResult
   $Res call(
-      {String? id, String? name, int? capacity, List<List<String>>? seats});
+      {String? id, String? name, int? capacity, List<List<String?>>? seats});
 }
 
 /// @nodoc
@@ -75,7 +75,7 @@ class _$RoomResponseCopyWithImpl<$Res, $Val extends RoomResponse>
       seats: freezed == seats
           ? _value.seats
           : seats // ignore: cast_nullable_to_non_nullable
-              as List<List<String>>?,
+              as List<List<String?>>?,
     ) as $Val);
   }
 }
@@ -89,7 +89,7 @@ abstract class _$$RoomResponseImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? id, String? name, int? capacity, List<List<String>>? seats});
+      {String? id, String? name, int? capacity, List<List<String?>>? seats});
 }
 
 /// @nodoc
@@ -124,7 +124,7 @@ class __$$RoomResponseImplCopyWithImpl<$Res>
       seats: freezed == seats
           ? _value._seats
           : seats // ignore: cast_nullable_to_non_nullable
-              as List<List<String>>?,
+              as List<List<String?>>?,
     ));
   }
 }
@@ -133,7 +133,7 @@ class __$$RoomResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$RoomResponseImpl implements _RoomResponse {
   _$RoomResponseImpl(
-      {this.id, this.name, this.capacity, final List<List<String>>? seats})
+      {this.id, this.name, this.capacity, final List<List<String?>>? seats})
       : _seats = seats;
 
   factory _$RoomResponseImpl.fromJson(Map<String, dynamic> json) =>
@@ -145,9 +145,9 @@ class _$RoomResponseImpl implements _RoomResponse {
   final String? name;
   @override
   final int? capacity;
-  final List<List<String>>? _seats;
+  final List<List<String?>>? _seats;
   @override
-  List<List<String>>? get seats {
+  List<List<String?>>? get seats {
     final value = _seats;
     if (value == null) return null;
     if (_seats is EqualUnmodifiableListView) return _seats;
@@ -196,7 +196,7 @@ abstract class _RoomResponse implements RoomResponse {
       {final String? id,
       final String? name,
       final int? capacity,
-      final List<List<String>>? seats}) = _$RoomResponseImpl;
+      final List<List<String?>>? seats}) = _$RoomResponseImpl;
 
   factory _RoomResponse.fromJson(Map<String, dynamic> json) =
       _$RoomResponseImpl.fromJson;
@@ -208,7 +208,7 @@ abstract class _RoomResponse implements RoomResponse {
   @override
   int? get capacity;
   @override
-  List<List<String>>? get seats;
+  List<List<String?>>? get seats;
   @override
   @JsonKey(ignore: true)
   _$$RoomResponseImplCopyWith<_$RoomResponseImpl> get copyWith =>

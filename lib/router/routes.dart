@@ -3,6 +3,7 @@ import 'package:s7_cinema/pages/admin/comp_film.dart';
 import 'package:s7_cinema/pages/admin/home_ad.dart';
 import 'package:s7_cinema/pages/admin/movie_management.dart';
 import 'package:s7_cinema/pages/admin/theater_management.dart';
+import 'package:s7_cinema/pages/history.dart';
 import 'package:s7_cinema/pages/login.dart';
 import 'package:s7_cinema/pages/movie_book.dart';
 import 'package:s7_cinema/pages/sign_up.dart';
@@ -22,6 +23,7 @@ class Routes {
     'movie_management': (_) => const MovieManagementPage(),
     'comp_film': (_) => const CompFilm(),
     'theater': (_) => const TheaterManagementPage(),
+    'history': (_) => const History(),
     // 'schedule': (_) => const SchedulePage(),
     // 'profile': (_) => const Profile(),
   };

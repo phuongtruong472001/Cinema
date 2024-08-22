@@ -6,13 +6,11 @@ part 'showtimes.g.dart';
 @freezed
 class ShowtimesResponse with _$ShowtimesResponse {
   factory ShowtimesResponse({
-    String? id,
-    String? name,
-    int? duration,
-    String? description,
-    String? thumbnail,
-    DateTime? createdAt,
-    DateTime? updatedAt,
+    final String? movie,
+    final String? room,
+    final int? price,
+    final int? startTime,
+    final String? id,
   }) = _ShowtimesResponse;
 
   factory ShowtimesResponse.fromJson(Map<String, dynamic> json) => _$ShowtimesResponseFromJson(json);

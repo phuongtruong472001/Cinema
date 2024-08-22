@@ -41,6 +41,7 @@ class _CompFilmState extends State<CompFilm> {
       nameController.text = film!.name ?? '';
       durationController.text = film!.duration.toString();
       descriptionController.text = film!.description ?? '';
+      trailerController.text = film!.thumbnail ?? '';
       setState(() {});
     } catch (error) {
       print(error);
@@ -65,7 +66,21 @@ class _CompFilmState extends State<CompFilm> {
     }
   }
 
-  void createFilm() {}
+  void createFilm() async {
+    try {
+      await api.createFilm({
+        "name": nameController.text,
+        "duration": int.parse(durationController.text),
+        "description": descriptionController.text,
+        "thumbnail": trailerController.text,
+      });
+      Navigator.pop(context, true);
+      ScaffoldMessenger.of(context).showSnackBar(baseSnackbar(message: 'Thêm thành công'));
+    } catch (error) {
+      print(error);
+      ScaffoldMessenger.of(context).showSnackBar(baseSnackbar(isSuccess: false, message: 'Thêm thất bại'));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

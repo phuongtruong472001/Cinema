@@ -12,7 +12,6 @@ class _HomeAdState extends State<HomeAd> {
     'Quản lý phim': 'movie_management',
     'Quản lý rạp': 'theater',
     'Quản lý lịch chiếu': 'schedule',
-    'Quản lý người dùng': 'user',
   };
   @override
   Widget build(BuildContext context) {

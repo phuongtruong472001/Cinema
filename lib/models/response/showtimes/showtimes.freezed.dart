@@ -20,13 +20,11 @@ ShowtimesResponse _$ShowtimesResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ShowtimesResponse {
+  String? get movie => throw _privateConstructorUsedError;
+  String? get room => throw _privateConstructorUsedError;
+  int? get price => throw _privateConstructorUsedError;
+  int? get startTime => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  int? get duration => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  String? get thumbnail => throw _privateConstructorUsedError;
-  DateTime? get createdAt => throw _privateConstructorUsedError;
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,13 +39,7 @@ abstract class $ShowtimesResponseCopyWith<$Res> {
       _$ShowtimesResponseCopyWithImpl<$Res, ShowtimesResponse>;
   @useResult
   $Res call(
-      {String? id,
-      String? name,
-      int? duration,
-      String? description,
-      String? thumbnail,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      {String? movie, String? room, int? price, int? startTime, String? id});
 }
 
 /// @nodoc
@@ -63,43 +55,33 @@ class _$ShowtimesResponseCopyWithImpl<$Res, $Val extends ShowtimesResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? movie = freezed,
+    Object? room = freezed,
+    Object? price = freezed,
+    Object? startTime = freezed,
     Object? id = freezed,
-    Object? name = freezed,
-    Object? duration = freezed,
-    Object? description = freezed,
-    Object? thumbnail = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
+      movie: freezed == movie
+          ? _value.movie
+          : movie // ignore: cast_nullable_to_non_nullable
+              as String?,
+      room: freezed == room
+          ? _value.room
+          : room // ignore: cast_nullable_to_non_nullable
+              as String?,
+      price: freezed == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int?,
+      startTime: freezed == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as int?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      duration: freezed == duration
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as int?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      thumbnail: freezed == thumbnail
-          ? _value.thumbnail
-          : thumbnail // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ) as $Val);
   }
 }
@@ -113,13 +95,7 @@ abstract class _$$ShowtimesResponseImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? id,
-      String? name,
-      int? duration,
-      String? description,
-      String? thumbnail,
-      DateTime? createdAt,
-      DateTime? updatedAt});
+      {String? movie, String? room, int? price, int? startTime, String? id});
 }
 
 /// @nodoc
@@ -133,43 +109,33 @@ class __$$ShowtimesResponseImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? movie = freezed,
+    Object? room = freezed,
+    Object? price = freezed,
+    Object? startTime = freezed,
     Object? id = freezed,
-    Object? name = freezed,
-    Object? duration = freezed,
-    Object? description = freezed,
-    Object? thumbnail = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
   }) {
     return _then(_$ShowtimesResponseImpl(
+      movie: freezed == movie
+          ? _value.movie
+          : movie // ignore: cast_nullable_to_non_nullable
+              as String?,
+      room: freezed == room
+          ? _value.room
+          : room // ignore: cast_nullable_to_non_nullable
+              as String?,
+      price: freezed == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int?,
+      startTime: freezed == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as int?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      duration: freezed == duration
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as int?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      thumbnail: freezed == thumbnail
-          ? _value.thumbnail
-          : thumbnail // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ));
   }
 }
@@ -178,35 +144,25 @@ class __$$ShowtimesResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ShowtimesResponseImpl implements _ShowtimesResponse {
   _$ShowtimesResponseImpl(
-      {this.id,
-      this.name,
-      this.duration,
-      this.description,
-      this.thumbnail,
-      this.createdAt,
-      this.updatedAt});
+      {this.movie, this.room, this.price, this.startTime, this.id});
 
   factory _$ShowtimesResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ShowtimesResponseImplFromJson(json);
 
   @override
+  final String? movie;
+  @override
+  final String? room;
+  @override
+  final int? price;
+  @override
+  final int? startTime;
+  @override
   final String? id;
-  @override
-  final String? name;
-  @override
-  final int? duration;
-  @override
-  final String? description;
-  @override
-  final String? thumbnail;
-  @override
-  final DateTime? createdAt;
-  @override
-  final DateTime? updatedAt;
 
   @override
   String toString() {
-    return 'ShowtimesResponse(id: $id, name: $name, duration: $duration, description: $description, thumbnail: $thumbnail, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ShowtimesResponse(movie: $movie, room: $room, price: $price, startTime: $startTime, id: $id)';
   }
 
   @override
@@ -214,24 +170,18 @@ class _$ShowtimesResponseImpl implements _ShowtimesResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ShowtimesResponseImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.duration, duration) ||
-                other.duration == duration) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.thumbnail, thumbnail) ||
-                other.thumbnail == thumbnail) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+            (identical(other.movie, movie) || other.movie == movie) &&
+            (identical(other.room, room) || other.room == room) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, duration, description,
-      thumbnail, createdAt, updatedAt);
+  int get hashCode =>
+      Object.hash(runtimeType, movie, room, price, startTime, id);
 
   @JsonKey(ignore: true)
   @override
@@ -250,31 +200,25 @@ class _$ShowtimesResponseImpl implements _ShowtimesResponse {
 
 abstract class _ShowtimesResponse implements ShowtimesResponse {
   factory _ShowtimesResponse(
-      {final String? id,
-      final String? name,
-      final int? duration,
-      final String? description,
-      final String? thumbnail,
-      final DateTime? createdAt,
-      final DateTime? updatedAt}) = _$ShowtimesResponseImpl;
+      {final String? movie,
+      final String? room,
+      final int? price,
+      final int? startTime,
+      final String? id}) = _$ShowtimesResponseImpl;
 
   factory _ShowtimesResponse.fromJson(Map<String, dynamic> json) =
       _$ShowtimesResponseImpl.fromJson;
 
   @override
+  String? get movie;
+  @override
+  String? get room;
+  @override
+  int? get price;
+  @override
+  int? get startTime;
+  @override
   String? get id;
-  @override
-  String? get name;
-  @override
-  int? get duration;
-  @override
-  String? get description;
-  @override
-  String? get thumbnail;
-  @override
-  DateTime? get createdAt;
-  @override
-  DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$ShowtimesResponseImplCopyWith<_$ShowtimesResponseImpl> get copyWith =>

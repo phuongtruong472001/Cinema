@@ -112,8 +112,9 @@ class _MovieManagementPageState extends State<MovieManagementPage> {
             height: 50,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              image: const DecorationImage(
-                image: NetworkImage('https://picsum.photos/200/300'),
+              image: DecorationImage(
+                image: NetworkImage(
+                    film.thumbnail ?? 'https://d19ri4mdy82u9u.cloudfront.net/images/blogs/65bba905415e4a3b95a2bf8d/JwLU4EMtgjIYvSu8anOX.jpg'),
                 fit: BoxFit.cover,
               ),
             ),

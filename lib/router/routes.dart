@@ -24,6 +24,7 @@ class Routes {
     'comp_film': (_) => const CompFilm(),
     'theater': (_) => const TheaterManagementPage(),
     'history': (_) => const History(),
+
     // 'schedule': (_) => const SchedulePage(),
     // 'profile': (_) => const Profile(),
   };

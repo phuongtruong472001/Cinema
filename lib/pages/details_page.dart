@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:s7_cinema/models/response/film/film.dart';
+import 'package:s7_cinema/pages/select_time_page.dart';
 import 'package:s7_cinema/widgets/button.dart';
 
 class DetailsPage extends StatelessWidget {
@@ -25,7 +26,7 @@ class DetailsPage extends StatelessWidget {
               child: BaseButton(
                 text: 'Đặt vé',
                 onPressed: () {
-                  Navigator.pushNamed(context, 'book', arguments: movie);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SelectTimePage(movie: movie)));
                 },
               ),
             )

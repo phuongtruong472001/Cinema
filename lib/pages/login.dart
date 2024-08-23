@@ -13,7 +13,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _emailController = TextEditingController(text: 'admin@cinema.com');
+  final TextEditingController _emailController = TextEditingController(text: 'phuongphuong2001@gmail.com');
   final TextEditingController _passwordController = TextEditingController(text: '12345678');
   final api = ApiLogin.instance.restClient;
 

@@ -1,5 +1,6 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:s7_cinema/models/response/film/film.dart';
 import 'package:s7_cinema/repository/showtimes/showtimes_repository.dart';
 
@@ -15,6 +16,7 @@ class SelectTimePage extends StatefulWidget {
 
 class _SelectTimePageState extends State<SelectTimePage> {
   List<ShowtimesResponse> listTime = [];
+  ShowtimesResponse? selectedTime;
   bool isLoading = true;
 
   final api = ApiShowtimes.instance.restClient;
@@ -52,59 +54,72 @@ class _SelectTimePageState extends State<SelectTimePage> {
             child: AnimatedSwitcher(
               duration: const Duration(milliseconds: 550),
               switchOutCurve: Curves.easeInBack,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  //Date Title
-                  const Text(
-                    'Select a date',
-                  ),
-
-                  const SizedBox(height: 15),
-
-                  //Dates list
-                  EasyDateTimeLine(
-                    initialDate: DateTime.now(),
-                    onDateChange: (selectedDate) {
-                      //`selectedDate` the new date selected.
-                    },
-                  ),
-
-                  //Time Title
-                  const Text(
-                    'Select a time',
-                  ),
-
-                  const SizedBox(height: 15),
-
-                  //Show times list
-                  Container(
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //Date Title
+                    const Text(
+                      'Select a date',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                    height: 85,
-                    margin: const EdgeInsets.only(right: 20),
-                    padding: const EdgeInsets.fromLTRB(0, 20, 20, 20),
-                    child: _showTimesList(),
-                  ),
 
-                  //Continue button
-                  Center(
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, 'book', arguments: widget.movie);
-                      },
-                      child: const Text(
-                        'CONTINUE',
+                    const SizedBox(height: 15),
+
+                    //Dates list
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: EasyDateTimeLine(
+                        initialDate: DateTime.now(),
+                        activeColor: Colors.green,
+                        onDateChange: (selectedDate) {
+                          //`selectedDate` the new date selected.
+                        },
                       ),
                     ),
-                  ),
+                    const SizedBox(height: 15),
+                    //Time Title
+                    const Text(
+                      'Select a time',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
 
-                  const SizedBox(height: 5),
-                ],
+                    //Show times list
+                    Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                        ),
+                      ),
+                      height: 85,
+                      margin: const EdgeInsets.only(right: 20),
+                      padding: const EdgeInsets.fromLTRB(0, 20, 20, 20),
+                      child: _showTimesList(),
+                    ),
+
+                    //Continue button
+                    Center(
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'book', arguments: widget.movie);
+                        },
+                        child: const Text(
+                          'CONTINUE',
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 5),
+                  ],
+                ),
               ),
             ),
           ),
@@ -116,21 +131,28 @@ class _SelectTimePageState extends State<SelectTimePage> {
   Widget _showTimesList() {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: 5,
+      itemCount: listTime.length,
       itemBuilder: (context, index) {
-        return Container(
-          margin: const EdgeInsets.only(right: 10),
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: const Text(
-            '12:00 PM',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
+        return GestureDetector(
+          onTap: () {
+            setState(() {
+              selectedTime = listTime[index];
+            });
+          },
+          child: Container(
+            margin: const EdgeInsets.only(right: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            decoration: BoxDecoration(
+              color: selectedTime == listTime[index] ? Colors.green : Colors.grey[200],
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
+              DateFormat.Hm().format(DateTime.fromMillisecondsSinceEpoch((listTime[index].startTime ?? 0) * 1000)),
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         );

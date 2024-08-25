@@ -11,7 +11,6 @@ class _HomeAdState extends State<HomeAd> {
   final Map<String, String> _items = {
     'Quản lý phim': 'movie_management',
     'Quản lý rạp': 'theater',
-    'Quản lý lịch chiếu': 'schedule',
   };
   @override
   Widget build(BuildContext context) {

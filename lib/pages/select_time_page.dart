@@ -34,6 +34,7 @@ class _SelectTimePageState extends State<SelectTimePage> {
 
       listTime.addAll(list);
       isLoading = false;
+      setState(() {});
     } catch (error) {
       print(error);
     }

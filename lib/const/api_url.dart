@@ -13,4 +13,6 @@ class ApiUrl {
   static const String showtimes = '/showtimes';
 
   static const String room = '/room';
+
+  static const String ticket = '/ticket';
 }

@@ -1,7 +1,7 @@
 // màn lịch sử đặt vé
 import 'package:flutter/material.dart';
-import 'package:s7_cinema/models/response/showtimes/showtimes.dart';
-import 'package:s7_cinema/repository/showtimes/showtimes_repository.dart';
+import 'package:s7_cinema/models/response/ticket/ticket.dart';
+import 'package:s7_cinema/repository/ticket/ticket_repository.dart';
 
 class History extends StatefulWidget {
   const History({super.key});
@@ -13,33 +13,33 @@ class History extends StatefulWidget {
 class _HistoryState extends State<History> {
   int pageIndex = 0;
 
-  final api = ApiShowtimes.instance.restClient;
+  final api = ApiTicket.instance.restClient;
 
-  List<ShowtimesResponse> listShowtimes = [];
+  List<TicketResponse> listTicket = [];
 
   bool isLoading = true;
 
   @override
   void initState() {
-    getListShowtimes();
+    getListTicket();
     super.initState();
   }
 
-  getListShowtimes({bool? isLoadMore = false}) async {
+  getListTicket({bool? isLoadMore = false}) async {
     if (isLoadMore == false) {
       pageIndex = 0;
-      listShowtimes.clear();
+      listTicket.clear();
     } else {
       pageIndex++;
     }
     try {
-      final response = await api.listShowtimes({
+      final response = await api.listTicket({
         "page": pageIndex,
         "limit": 10,
       });
 
-      List<ShowtimesResponse> list = response.data['items'].map<ShowtimesResponse>((e) => ShowtimesResponse.fromJson(e)).toList();
-      listShowtimes.addAll(list);
+      List<TicketResponse> list = response.data['items'].map<TicketResponse>((e) => TicketResponse.fromJson(e)).toList();
+      listTicket.addAll(list);
       isLoading = false;
     } catch (error) {
       print(error);
@@ -58,9 +58,9 @@ class _HistoryState extends State<History> {
               child: CircularProgressIndicator(),
             )
           : ListView.builder(
-              itemCount: listShowtimes.length,
+              itemCount: listTicket.length,
               itemBuilder: (context, index) {
-                final showtime = listShowtimes[index];
+                final showtime = listTicket[index];
                 return Container(
                   margin: const EdgeInsets.all(8),
                   decoration: BoxDecoration(

@@ -47,6 +47,17 @@ class _TheaterManagementPageState extends State<TheaterManagementPage> {
     setState(() {});
   }
 
+  deleteRoom(RoomResponse room) async {
+    try {
+      await api.deleteRoom(room.id ?? '');
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Xóa phim thành công')));
+      getLisrTheater();
+    } catch (error) {
+      print(error);
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Xóa phim thất bại')));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,14 +101,14 @@ class _TheaterManagementPageState extends State<TheaterManagementPage> {
     );
   }
 
-  Widget _itemRoom(RoomResponse film) {
+  Widget _itemRoom(RoomResponse room) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(context, MaterialPageRoute(builder: (context) => CompTheater(id: film.id))).then((value) {
-        //   if (value == true) {
-        //     getLisrTheater();
-        //   }
-        // });
+        Navigator.push(context, MaterialPageRoute(builder: (context) => CompTheater(id: room.id))).then((value) {
+          if (value == true) {
+            getLisrTheater();
+          }
+        });
       },
       child: Container(
         decoration: BoxDecoration(
@@ -124,11 +135,11 @@ class _TheaterManagementPageState extends State<TheaterManagementPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  film.name ?? '',
+                  room.name ?? '',
                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                 ),
                 Text(
-                  film.capacity.toString(),
+                  room.capacity.toString(),
                   style: const TextStyle(fontSize: 16),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -140,7 +151,7 @@ class _TheaterManagementPageState extends State<TheaterManagementPage> {
           IconButton(
             icon: const Icon(Icons.edit),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => CompTheater(id: film.id))).then((value) {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CompTheater(id: room.id))).then((value) {
                 if (value == true) {
                   getLisrTheater();
                 }
@@ -150,7 +161,9 @@ class _TheaterManagementPageState extends State<TheaterManagementPage> {
           const SizedBox(width: 8),
           IconButton(
             icon: const Icon(Icons.delete),
-            onPressed: () {},
+            onPressed: () {
+              deleteRoom(room);
+            },
           ),
         ]),
       ),

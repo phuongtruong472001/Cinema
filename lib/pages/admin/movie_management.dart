@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:s7_cinema/models/response/film/film.dart';
 import 'package:s7_cinema/pages/admin/comp_film.dart';
 import 'package:s7_cinema/repository/film/film_repository.dart';
+import 'package:s7_cinema/widgets/base_snackbar.dart';
 
 class MovieManagementPage extends StatefulWidget {
   const MovieManagementPage({super.key});
@@ -45,6 +46,17 @@ class _MovieManagementPageState extends State<MovieManagementPage> {
       print(error);
     }
     setState(() {});
+  }
+
+  deleteFilm(FilmResponse film) async {
+    try {
+      await api.deleteFilm(film.id ?? '');
+      ScaffoldMessenger.of(context).showSnackBar(baseSnackbar(message: 'Xóa phim thành công'));
+      getListFilm();
+    } catch (error) {
+      print(error);
+      ScaffoldMessenger.of(context).showSnackBar(baseSnackbar(isSuccess: false, message: 'Xóa phim thất bại'));
+    }
   }
 
   @override
@@ -141,12 +153,20 @@ class _MovieManagementPageState extends State<MovieManagementPage> {
           const SizedBox(width: 8),
           IconButton(
             icon: const Icon(Icons.edit),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const CompFilm())).then((value) {
+                if (value == true) {
+                  getListFilm();
+                }
+              });
+            },
           ),
           const SizedBox(width: 8),
           IconButton(
             icon: const Icon(Icons.delete),
-            onPressed: () {},
+            onPressed: () {
+              deleteFilm(film);
+            },
           ),
         ]),
       ),

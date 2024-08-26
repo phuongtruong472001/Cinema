@@ -20,7 +20,7 @@ abstract class RestClientApi {
   factory RestClientApi(Dio dio, {String baseUrl}) = _RestClientApi;
 
   @GET(ApiUrl.showtimes)
-  Future<ApiResponse> listShowtimes(@Body() Map<String, dynamic> body);
+  Future<ApiResponse> listShowtimes(@Queries() Map<String, dynamic> body);
 
   @GET('${ApiUrl.showtimes}/{id}')
   Future<ApiResponse<ShowtimesResponse>> detailShowtimes(@Path() String id);

@@ -14,5 +14,5 @@ class ApiUrl {
 
   static const String room = '/room';
 
-  static const String ticket = '/ticket';
+  static const String ticket = '/tickets';
 }

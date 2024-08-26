@@ -1,5 +1,6 @@
 // màn lịch sử đặt vé
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:s7_cinema/models/response/ticket/ticket.dart';
 import 'package:s7_cinema/repository/ticket/ticket_repository.dart';
 
@@ -38,12 +39,12 @@ class _HistoryState extends State<History> {
         "limit": 10,
       });
 
-      List<TicketResponse> list = response.data['items'].map<TicketResponse>((e) => TicketResponse.fromJson(e)).toList();
+      List<TicketResponse> list = response.data.map<TicketResponse>((e) => TicketResponse.fromJson(e)).toList();
       listTicket.addAll(list);
-      isLoading = false;
     } catch (error) {
       print(error);
     }
+    isLoading = false;
     setState(() {});
   }
 
@@ -60,18 +61,19 @@ class _HistoryState extends State<History> {
           : ListView.builder(
               itemCount: listTicket.length,
               itemBuilder: (context, index) {
-                final showtime = listTicket[index];
-                return Container(
-                  margin: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.white,
-                  ),
+                final ticket = listTicket[index];
+                DateTime date = DateTime.fromMillisecondsSinceEpoch((ticket.showtime?.startTime ?? 0) * 1000);
+                return Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
                   child: ListTile(
-                    title: Text(showtime.movie ?? ''),
-                    subtitle: Text('Phòng ${showtime.room} - ${showtime.startTime}'),
-                    trailing: Text('Giá: ${showtime.price}'),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(color: Colors.grey.shade300),
+                    ),
+                    isThreeLine: true,
+                    title: Text(ticket.showtime?.movie?.name ?? ''),
+                    subtitle: Text('Phòng ${ticket.showtime?.room?.name} - Ghế: ${ticket.seat}'),
+                    trailing: Text('${DateFormat.Hm().format(date)} - ${DateFormat.yMd().format(date)}'),
                   ),
                 );
               },

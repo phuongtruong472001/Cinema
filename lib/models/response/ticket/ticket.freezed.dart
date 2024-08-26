@@ -20,11 +20,11 @@ TicketResponse _$TicketResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TicketResponse {
-  String? get movie => throw _privateConstructorUsedError;
-  String? get room => throw _privateConstructorUsedError;
-  int? get price => throw _privateConstructorUsedError;
+  ShowtimesDetailResponse? get showtime => throw _privateConstructorUsedError;
   int? get startTime => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
+  String? get seat => throw _privateConstructorUsedError;
+  String? get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,7 +39,13 @@ abstract class $TicketResponseCopyWith<$Res> {
       _$TicketResponseCopyWithImpl<$Res, TicketResponse>;
   @useResult
   $Res call(
-      {String? movie, String? room, int? price, int? startTime, String? id});
+      {ShowtimesDetailResponse? showtime,
+      int? startTime,
+      String? id,
+      String? seat,
+      String? user});
+
+  $ShowtimesDetailResponseCopyWith<$Res>? get showtime;
 }
 
 /// @nodoc
@@ -55,25 +61,17 @@ class _$TicketResponseCopyWithImpl<$Res, $Val extends TicketResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? movie = freezed,
-    Object? room = freezed,
-    Object? price = freezed,
+    Object? showtime = freezed,
     Object? startTime = freezed,
     Object? id = freezed,
+    Object? seat = freezed,
+    Object? user = freezed,
   }) {
     return _then(_value.copyWith(
-      movie: freezed == movie
-          ? _value.movie
-          : movie // ignore: cast_nullable_to_non_nullable
-              as String?,
-      room: freezed == room
-          ? _value.room
-          : room // ignore: cast_nullable_to_non_nullable
-              as String?,
-      price: freezed == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as int?,
+      showtime: freezed == showtime
+          ? _value.showtime
+          : showtime // ignore: cast_nullable_to_non_nullable
+              as ShowtimesDetailResponse?,
       startTime: freezed == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
@@ -82,7 +80,27 @@ class _$TicketResponseCopyWithImpl<$Res, $Val extends TicketResponse>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      seat: freezed == seat
+          ? _value.seat
+          : seat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ShowtimesDetailResponseCopyWith<$Res>? get showtime {
+    if (_value.showtime == null) {
+      return null;
+    }
+
+    return $ShowtimesDetailResponseCopyWith<$Res>(_value.showtime!, (value) {
+      return _then(_value.copyWith(showtime: value) as $Val);
+    });
   }
 }
 
@@ -95,7 +113,14 @@ abstract class _$$TicketResponseImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? movie, String? room, int? price, int? startTime, String? id});
+      {ShowtimesDetailResponse? showtime,
+      int? startTime,
+      String? id,
+      String? seat,
+      String? user});
+
+  @override
+  $ShowtimesDetailResponseCopyWith<$Res>? get showtime;
 }
 
 /// @nodoc
@@ -109,25 +134,17 @@ class __$$TicketResponseImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? movie = freezed,
-    Object? room = freezed,
-    Object? price = freezed,
+    Object? showtime = freezed,
     Object? startTime = freezed,
     Object? id = freezed,
+    Object? seat = freezed,
+    Object? user = freezed,
   }) {
     return _then(_$TicketResponseImpl(
-      movie: freezed == movie
-          ? _value.movie
-          : movie // ignore: cast_nullable_to_non_nullable
-              as String?,
-      room: freezed == room
-          ? _value.room
-          : room // ignore: cast_nullable_to_non_nullable
-              as String?,
-      price: freezed == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as int?,
+      showtime: freezed == showtime
+          ? _value.showtime
+          : showtime // ignore: cast_nullable_to_non_nullable
+              as ShowtimesDetailResponse?,
       startTime: freezed == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
@@ -135,6 +152,14 @@ class __$$TicketResponseImplCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      seat: freezed == seat
+          ? _value.seat
+          : seat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -144,25 +169,25 @@ class __$$TicketResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TicketResponseImpl implements _TicketResponse {
   _$TicketResponseImpl(
-      {this.movie, this.room, this.price, this.startTime, this.id});
+      {this.showtime, this.startTime, this.id, this.seat, this.user});
 
   factory _$TicketResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$TicketResponseImplFromJson(json);
 
   @override
-  final String? movie;
-  @override
-  final String? room;
-  @override
-  final int? price;
+  final ShowtimesDetailResponse? showtime;
   @override
   final int? startTime;
   @override
   final String? id;
+  @override
+  final String? seat;
+  @override
+  final String? user;
 
   @override
   String toString() {
-    return 'TicketResponse(movie: $movie, room: $room, price: $price, startTime: $startTime, id: $id)';
+    return 'TicketResponse(showtime: $showtime, startTime: $startTime, id: $id, seat: $seat, user: $user)';
   }
 
   @override
@@ -170,18 +195,19 @@ class _$TicketResponseImpl implements _TicketResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TicketResponseImpl &&
-            (identical(other.movie, movie) || other.movie == movie) &&
-            (identical(other.room, room) || other.room == room) &&
-            (identical(other.price, price) || other.price == price) &&
+            (identical(other.showtime, showtime) ||
+                other.showtime == showtime) &&
             (identical(other.startTime, startTime) ||
                 other.startTime == startTime) &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.seat, seat) || other.seat == seat) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, movie, room, price, startTime, id);
+      Object.hash(runtimeType, showtime, startTime, id, seat, user);
 
   @JsonKey(ignore: true)
   @override
@@ -200,25 +226,25 @@ class _$TicketResponseImpl implements _TicketResponse {
 
 abstract class _TicketResponse implements TicketResponse {
   factory _TicketResponse(
-      {final String? movie,
-      final String? room,
-      final int? price,
+      {final ShowtimesDetailResponse? showtime,
       final int? startTime,
-      final String? id}) = _$TicketResponseImpl;
+      final String? id,
+      final String? seat,
+      final String? user}) = _$TicketResponseImpl;
 
   factory _TicketResponse.fromJson(Map<String, dynamic> json) =
       _$TicketResponseImpl.fromJson;
 
   @override
-  String? get movie;
-  @override
-  String? get room;
-  @override
-  int? get price;
+  ShowtimesDetailResponse? get showtime;
   @override
   int? get startTime;
   @override
   String? get id;
+  @override
+  String? get seat;
+  @override
+  String? get user;
   @override
   @JsonKey(ignore: true)
   _$$TicketResponseImplCopyWith<_$TicketResponseImpl> get copyWith =>

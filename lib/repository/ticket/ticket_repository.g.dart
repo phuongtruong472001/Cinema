@@ -35,7 +35,7 @@ class _RestClientApi implements RestClientApi {
     )
             .compose(
               _dio.options,
-              '/ticket',
+              '/tickets',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -65,7 +65,7 @@ class _RestClientApi implements RestClientApi {
     )
             .compose(
               _dio.options,
-              '/ticket/${id}',
+              '/tickets/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -96,7 +96,7 @@ class _RestClientApi implements RestClientApi {
     )
             .compose(
               _dio.options,
-              '/ticket',
+              '/tickets',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -130,7 +130,7 @@ class _RestClientApi implements RestClientApi {
     )
             .compose(
               _dio.options,
-              '/ticket/${id}',
+              '/tickets/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -160,7 +160,7 @@ class _RestClientApi implements RestClientApi {
     )
             .compose(
               _dio.options,
-              '/ticket/${id}',
+              '/tickets/${id}',
               queryParameters: queryParameters,
               data: _data,
             )

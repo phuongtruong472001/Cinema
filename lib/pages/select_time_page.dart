@@ -22,6 +22,8 @@ class _SelectTimePageState extends State<SelectTimePage> {
 
   final api = ApiShowtimes.instance.restClient;
 
+  DateTime selectedDate = DateTime.now();
+
   @override
   void initState() {
     getListTime();
@@ -29,9 +31,15 @@ class _SelectTimePageState extends State<SelectTimePage> {
   }
 
   void getListTime() async {
+    listTime.clear();
     try {
-      List<ShowtimesResponse> list =
-          (await api.listShowtimes({})).data['items'].map<ShowtimesResponse>((e) => ShowtimesResponse.fromJson(e)).toList();
+      List<ShowtimesResponse> list = (await api.listShowtimes({
+        'from': selectedDate.millisecondsSinceEpoch ~/ 1000,
+        'to': DateTime(selectedDate.year, selectedDate.month, selectedDate.day, 23, 59).millisecondsSinceEpoch ~/ 1000,
+      }))
+          .data['items']
+          .map<ShowtimesResponse>((e) => ShowtimesResponse.fromJson(e))
+          .toList();
 
       listTime.addAll(list);
       isLoading = false;
@@ -78,8 +86,10 @@ class _SelectTimePageState extends State<SelectTimePage> {
                       child: EasyDateTimeLine(
                         initialDate: DateTime.now(),
                         activeColor: Colors.green,
-                        onDateChange: (selectedDate) {
-                          //`selectedDate` the new date selected.
+                        onDateChange: (date) {
+                          selectedDate = date;
+                          selectedTime = null;
+                          getListTime();
                         },
                       ),
                     ),

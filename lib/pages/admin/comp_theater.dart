@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:s7_cinema/models/response/room/room.dart';
 import 'package:s7_cinema/repository/room/room_repository.dart';
+import 'package:s7_cinema/widgets/base_snackbar.dart';
 
 const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -37,16 +38,40 @@ class _CompTheaterState extends State<CompTheater> {
 
   getTheater(String id) async {
     try {
+      // isLoading = true;
       room = (await api.detailRoom(id)).data;
-      nameController.text = room!.name ?? '';
-      //  seats = room!.seats ?? [[] as List<int>];
-      // rowController.text = room!.
+      setState(() {
+        nameController.text = room!.name ?? '';
+        seats = room!.seats ?? [[] as List<String>];
+        row = seats.length;
+        col = seats[0].length;
+        rowController.text = seats.length.toString();
+        columnController.text = seats[0].length.toString();
+      });
+      // isLoading = false;
+      // print(seats);
     } catch (error) {
       print(error);
     }
   }
 
-  void editTheater() {}
+  Future<void> editTheater() async {
+    try {
+      await api.updateRoom(
+        {
+          'name': nameController.text,
+          'capacity': capacity,
+          'seats': seats,
+        },
+        widget.id!,
+      );
+      Navigator.pop(context, true);
+      ScaffoldMessenger.of(context).showSnackBar(baseSnackbar(message: 'Sửa thành công'));
+    } catch (error) {
+      print(error);
+      ScaffoldMessenger.of(context).showSnackBar(baseSnackbar(isSuccess: false, message: 'Sửa thất bại'));
+    }
+  }
 
   Future<void> createTheater() async {
     if (keyForm.currentState!.validate()) {
@@ -58,6 +83,7 @@ class _CompTheaterState extends State<CompTheater> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Thêm thành công')),
       );
+      Navigator.pop(context, true);
     }
   }
 
@@ -97,6 +123,7 @@ class _CompTheaterState extends State<CompTheater> {
                     controller: rowController,
                     onChanged: (value) {
                       row = int.tryParse(rowController.text) ?? 0;
+                      if (row > 25) row = 25;
                       seats = genSeats(row, col);
                       capacity = 0;
                       setState(() {});
@@ -116,6 +143,7 @@ class _CompTheaterState extends State<CompTheater> {
                     controller: columnController,
                     onChanged: (value) {
                       col = int.tryParse(columnController.text) ?? 0;
+                      if (col > 25) col = 25;
                       seats = genSeats(row, col);
                       capacity = 0;
                       setState(() {});
@@ -165,6 +193,7 @@ class _CompTheaterState extends State<CompTheater> {
                   children: List.generate(
                     row,
                     (indexRow) {
+                      print(seats);
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -212,7 +241,7 @@ class _CompTheaterState extends State<CompTheater> {
                       } else {
                         await createTheater();
                       }
-                      Navigator.pop(context, true);
+                      // Navigator.pop(context, true);
                     },
                     child: Text(isEdit ? 'Sửa' : 'Thêm'),
                   ),

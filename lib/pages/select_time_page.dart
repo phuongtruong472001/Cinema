@@ -2,6 +2,7 @@ import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:s7_cinema/models/response/film/film.dart';
+import 'package:s7_cinema/pages/movie_book.dart';
 import 'package:s7_cinema/repository/showtimes/showtimes_repository.dart';
 
 import '../models/response/showtimes/showtimes.dart';
@@ -120,7 +121,15 @@ class _SelectTimePageState extends State<SelectTimePage> {
                     Center(
                       child: TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, 'book', arguments: widget.movie);
+                          // Navigator.pushNamed(context, 'book', arguments: selectedTime);
+                          if (selectedTime != null) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MovieBook(selectedShowTime: selectedTime!),
+                              ),
+                            );
+                          }
                         },
                         child: const Text(
                           'CONTINUE',

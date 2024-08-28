@@ -154,7 +154,7 @@ class _MovieManagementPageState extends State<MovieManagementPage> {
           IconButton(
             icon: const Icon(Icons.edit),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const CompFilm())).then((value) {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CompFilm(id: film.id))).then((value) {
                 if (value == true) {
                   getListFilm();
                 }

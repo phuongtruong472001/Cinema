@@ -1,27 +1,26 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'package:s7_cinema/models/response/showtimes/showtimes.dart';
+import 'package:s7_cinema/pages/admin/comp_theater.dart';
+import 'package:s7_cinema/repository/ticket/ticket_repository.dart';
+import 'package:s7_cinema/widgets/base_snackbar.dart';
 
 class MovieBook extends StatefulWidget {
-  const MovieBook({super.key});
+  const MovieBook({super.key, required this.selectedShowTime});
+
+  final ShowtimesResponse selectedShowTime;
 
   @override
-  _MovieBookState createState() => _MovieBookState();
+  State<MovieBook> createState() => _MovieBookState();
 }
 
 class _MovieBookState extends State<MovieBook> with SingleTickerProviderStateMixin {
-  var chairs = [
-    [0, 0, 0, 0, 3, 3, 3, 0, 0, 0, 0],
-    [0, 0, 1, 1, 3, 3, 3, 0, 0, 0, 0],
-    [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-    [1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-  ];
-
+  List<List<int>> chairs = [[]];
+  List<String> selectedChairs = [];
   int amount = 0;
 
   //#####################################################################################################################//
@@ -34,19 +33,21 @@ class _MovieBookState extends State<MovieBook> with SingleTickerProviderStateMix
       color = const Color(0xFF52555D);
     else if (chairs[i][j] == 2)
       color = const Color(0xFF6EBF8D);
-    else if (chairs[i][j] == 3) color = Colors.transparent;
+    else if (chairs[i][j] == -1) color = Colors.transparent;
 
     return InkWell(
       borderRadius: BorderRadius.circular(5.0),
-      onTap: chairs[i][j] == 1 || chairs[i][j] == 3
+      onTap: chairs[i][j] == 1 || chairs[i][j] == -1
           ? null
           : () {
               if (chairs[i][j] == 1) return;
               setState(() {
                 if (chairs[i][j] == 0) {
                   amount++;
+                  selectedChairs.add(rowAndColumn2Id(i, j));
                 } else {
                   amount--;
+                  selectedChairs.removeWhere((item) => item == rowAndColumn2Id(i, j));
                 }
                 chairs[i][j] = 2 - chairs[i][j];
               });
@@ -67,28 +68,26 @@ class _MovieBookState extends State<MovieBook> with SingleTickerProviderStateMix
 
   Widget _buildRow(int i) {
     List<Widget> children = [];
-
-    int offset = 1;
-    for (int j = 0; j < 14; j++) {
-      if (j == 0) {
-        children.add(
-          Padding(
-            padding: const EdgeInsets.only(right: 3),
-            child: Text(
-              String.fromCharCode("A".codeUnitAt(0) + i),
-              style: const TextStyle(color: Colors.grey),
-              textScaleFactor: 1.1,
-            ),
-          ),
-        );
-      } else if (j == 5 || j == 9) {
-        offset++;
-        children.add(const SizedBox(
-          width: 15.0,
-        ));
-        continue;
-      } else
-        children.add(_buildSquare(i, j - offset));
+    for (int j = 0; j < chairs.first.length; j++) {
+      // if (j == 0) {
+      //   children.add(
+      //     Padding(
+      //       padding: const EdgeInsets.only(right: 3),
+      //       child: Text(
+      //         String.fromCharCode("A".codeUnitAt(0) + i),
+      //         style: const TextStyle(color: Colors.grey),
+      //         textScaleFactor: 1.1,
+      //       ),
+      //     ),
+      //   );
+      // } else if (j == 5 || j == 9) {
+      //   offset++;
+      //   children.add(const SizedBox(
+      //     width: 15.0,
+      //   ));
+      //   continue;
+      // } else
+      children.add(_buildSquare(i, j));
     }
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -117,6 +116,26 @@ class _MovieBookState extends State<MovieBook> with SingleTickerProviderStateMix
   }
 
   //#####################################################################################################################//
+  @override
+  void initState() {
+    getChairs();
+    super.initState();
+  }
+
+  void getChairs() async {
+    chairs = [];
+    final response = jsonDecode((await http.get(Uri.parse('http://localhost:3000/showtimes/${widget.selectedShowTime.id}/seat-status'))).body)
+        as Map<String, dynamic>;
+    final data = response['data'] as List<dynamic>;
+    for (var row in data) {
+      List<int> tmp = [];
+      for (var item in row as List<dynamic>) {
+        tmp.add(item as int);
+      }
+      chairs.add(tmp);
+    }
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,16 +167,17 @@ class _MovieBookState extends State<MovieBook> with SingleTickerProviderStateMix
     //#####################################################################################################################//
 
     int offset = 0;
-    for (int i = 0; i < 9; i++) {
-      if (i == 4) {
-        offset++;
-        children.add(
-          const SizedBox(height: 10.0),
-        );
-        continue;
-      }
+    for (int i = 0; i < chairs.length; i++) {
       children.add(_buildRow(i - offset));
     }
+
+    children.add(Container(
+      color: Colors.blue,
+      height: 30,
+      width: 300,
+      alignment: Alignment.center,
+      child: const Text("Màn hình"),
+    ));
     children.add(const SizedBox(height: 15.0));
 
     //#####################################################################################################################//
@@ -181,6 +201,21 @@ class _MovieBookState extends State<MovieBook> with SingleTickerProviderStateMix
     );
     children.add(const SizedBox(height: 100.0));
 
+    children.add(
+      ElevatedButton(
+        onPressed: () {
+          ApiTicket.instance.restClient.createTicket(
+            {
+              "showtime": widget.selectedShowTime.id,
+              "seats": selectedChairs,
+            },
+          );
+          Navigator.pop(context);
+          ScaffoldMessenger.of(context).showSnackBar(baseSnackbar(isSuccess: true, message: 'Đặt vé thành công'));
+        },
+        child: const Text("Đặt vé"),
+      ),
+    );
     //#####################################################################################################################//
 
     return Scaffold(

@@ -18,7 +18,7 @@ class Routes {
     'register': (_) => const SignUpScreen(),
     'home': (_) => const HomePage(),
     'details': (_) => const DetailsPage(),
-    'book': (_) => const MovieBook(),
+    // 'book': (_) => const MovieBook(),
     'home_ad': (_) => const HomeAd(),
     'movie_management': (_) => const MovieManagementPage(),
     'comp_film': (_) => const CompFilm(),

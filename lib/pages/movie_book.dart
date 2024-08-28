@@ -2,9 +2,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:s7_cinema/models/response/showtimes/showtimes.dart';
 
 class MovieBook extends StatefulWidget {
-  const MovieBook({super.key});
+  const MovieBook({super.key, required this.selectedShowTime});
+
+  final ShowtimesResponse selectedShowTime;
 
   @override
   _MovieBookState createState() => _MovieBookState();

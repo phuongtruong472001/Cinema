@@ -25,6 +25,8 @@ mixin _$LoginResponse {
   int? get status => throw _privateConstructorUsedError;
   int? get role => throw _privateConstructorUsedError;
   String? get accessToken => throw _privateConstructorUsedError;
+  String? get verificationCode => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +45,9 @@ abstract class $LoginResponseCopyWith<$Res> {
       String? email,
       int? status,
       int? role,
-      String? accessToken});
+      String? accessToken,
+      String? verificationCode,
+      String? id});
 }
 
 /// @nodoc
@@ -64,6 +68,8 @@ class _$LoginResponseCopyWithImpl<$Res, $Val extends LoginResponse>
     Object? status = freezed,
     Object? role = freezed,
     Object? accessToken = freezed,
+    Object? verificationCode = freezed,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
       name: freezed == name
@@ -86,6 +92,14 @@ class _$LoginResponseCopyWithImpl<$Res, $Val extends LoginResponse>
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
               as String?,
+      verificationCode: freezed == verificationCode
+          ? _value.verificationCode
+          : verificationCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -103,7 +117,9 @@ abstract class _$$LoginResponseImplCopyWith<$Res>
       String? email,
       int? status,
       int? role,
-      String? accessToken});
+      String? accessToken,
+      String? verificationCode,
+      String? id});
 }
 
 /// @nodoc
@@ -122,6 +138,8 @@ class __$$LoginResponseImplCopyWithImpl<$Res>
     Object? status = freezed,
     Object? role = freezed,
     Object? accessToken = freezed,
+    Object? verificationCode = freezed,
+    Object? id = freezed,
   }) {
     return _then(_$LoginResponseImpl(
       name: freezed == name
@@ -144,6 +162,14 @@ class __$$LoginResponseImplCopyWithImpl<$Res>
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
               as String?,
+      verificationCode: freezed == verificationCode
+          ? _value.verificationCode
+          : verificationCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -152,7 +178,13 @@ class __$$LoginResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LoginResponseImpl implements _LoginResponse {
   _$LoginResponseImpl(
-      {this.name, this.email, this.status, this.role, this.accessToken});
+      {this.name,
+      this.email,
+      this.status,
+      this.role,
+      this.accessToken,
+      this.verificationCode,
+      this.id});
 
   factory _$LoginResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoginResponseImplFromJson(json);
@@ -167,10 +199,14 @@ class _$LoginResponseImpl implements _LoginResponse {
   final int? role;
   @override
   final String? accessToken;
+  @override
+  final String? verificationCode;
+  @override
+  final String? id;
 
   @override
   String toString() {
-    return 'LoginResponse(name: $name, email: $email, status: $status, role: $role, accessToken: $accessToken)';
+    return 'LoginResponse(name: $name, email: $email, status: $status, role: $role, accessToken: $accessToken, verificationCode: $verificationCode, id: $id)';
   }
 
   @override
@@ -183,13 +219,16 @@ class _$LoginResponseImpl implements _LoginResponse {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.role, role) || other.role == role) &&
             (identical(other.accessToken, accessToken) ||
-                other.accessToken == accessToken));
+                other.accessToken == accessToken) &&
+            (identical(other.verificationCode, verificationCode) ||
+                other.verificationCode == verificationCode) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, email, status, role, accessToken);
+  int get hashCode => Object.hash(runtimeType, name, email, status, role,
+      accessToken, verificationCode, id);
 
   @JsonKey(ignore: true)
   @override
@@ -211,7 +250,9 @@ abstract class _LoginResponse implements LoginResponse {
       final String? email,
       final int? status,
       final int? role,
-      final String? accessToken}) = _$LoginResponseImpl;
+      final String? accessToken,
+      final String? verificationCode,
+      final String? id}) = _$LoginResponseImpl;
 
   factory _LoginResponse.fromJson(Map<String, dynamic> json) =
       _$LoginResponseImpl.fromJson;
@@ -226,6 +267,10 @@ abstract class _LoginResponse implements LoginResponse {
   int? get role;
   @override
   String? get accessToken;
+  @override
+  String? get verificationCode;
+  @override
+  String? get id;
   @override
   @JsonKey(ignore: true)
   _$$LoginResponseImplCopyWith<_$LoginResponseImpl> get copyWith =>

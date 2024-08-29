@@ -11,6 +11,8 @@ class LoginResponse with _$LoginResponse {
     int? status,
     int? role,
     String? accessToken,
+    String? verificationCode,
+    String? id,
   }) = _LoginResponse;
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => _$LoginResponseFromJson(json);

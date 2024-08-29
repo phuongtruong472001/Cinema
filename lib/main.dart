@@ -46,6 +46,7 @@ class MyApp extends StatelessWidget {
       title: 'Cinema',
       initialRoute: 'login',
       routes: Routes.routes,
+      builder: EasyLoading.init(),
       theme: ThemeData.light().copyWith(
         appBarTheme: const AppBarTheme(
           color: Colors.black87,

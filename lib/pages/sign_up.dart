@@ -24,12 +24,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void doSignUp() async {
     EasyLoading.show(status: 'loading...');
     try {
-      await api.register({
+      final response = await api.register({
         "name": _nameController.text.trim(),
         "email": _emailController.text.trim(),
         "password": _passwordController.text.trim(),
       });
 
+      await api.activate({'uid': response.data.id, "code": response.data.verificationCode});
       ScaffoldMessenger.of(context).showSnackBar(baseSnackbar(message: 'Đăng ký thành công'));
       Navigator.pushNamed(context, 'login');
     } catch (error) {

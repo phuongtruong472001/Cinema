@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:s7_cinema/datasource/local/storage.dart';
 import 'package:s7_cinema/models/response/login_response/login_response.dart';
 import 'package:s7_cinema/repository/auth/auth_repository.dart';
@@ -22,6 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   final formkey = GlobalKey<FormState>();
 
   onLogin() async {
+    EasyLoading.show(status: 'loading...');
     try {
       final response = await api.login({
         "email": _emailController.text.trim(),
@@ -37,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(baseSnackbar(isSuccess: false, message: 'Có lỗi xảy xa, vui lòng thử lại'));
       print(error);
     }
+    EasyLoading.dismiss();
   }
 
   @override

@@ -302,6 +302,14 @@ class _CompFilmState extends State<CompFilm> {
           Center(
             child: TextButton(
               onPressed: () {
+                if (selectedRoom == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(baseSnackbar(isSuccess: false, message: 'Vui lòng chọn phòng chiếu'));
+                  return;
+                }
+                if (listSelectedTime.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(baseSnackbar(isSuccess: false, message: 'Vui lòng chọn thời gian chiếu'));
+                  return;
+                }
                 addShowtimes();
               },
               child: const Text(
